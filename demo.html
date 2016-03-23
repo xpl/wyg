@@ -1,0 +1,164 @@
+<html>
+	<head>
+		<style type="text/css">
+			body { font-family: Verdana, sans-serif; padding: 50px; font-size: 14px; }
+			h1 { font-weight: normal; letter-spacing: -0.04em; font-size: 40px; }
+			main { margin: 0 auto; max-width: 700px; min-width: 100px; }
+		</style>
+
+		<!-- Wyg CSS -->
+		<link rel="stylesheet" type="text/css" href="build/wyg.css">
+
+		<!-- Underscore, jQuery -->
+		<script src="/node_modules/underscore/underscore.js"></script>
+		<script src="/node_modules/jquery/dist/jquery.js"></script>
+
+		<!-- Useless.js library -->
+		<script src="/node_modules/useless/build/useless.micro.min.js"></script>
+
+		<!-- Useless.js Devtools Library for unit tests and exception handling -->
+		<script src="/node_modules/useless/build/useless.devtools.js"></script>
+
+		<!-- Node+, DOMReference -->
+		<script src="/node_modules/useless/client/node+.js"></script>
+		<script src="/node_modules/useless/client/DOMReference.js"></script>
+
+		<!-- HTTP helpers (for image uploading) -->
+		<script src="/node_modules/useless/base/Parse.js"></script>
+		<script src="/node_modules/useless/client/API.js"></script>
+
+		<!-- Wyg source -->
+		<script src="/src/dom/observer.js"></script>
+		<script src="/src/dom/total_recall.js"></script>
+		<script src="/src/dom/caret_and_selection.js"></script>
+		<script src="/src/dom/mutation_debugger.js"></script>
+
+		<script src="/src/contenteditable/exec_command.js"></script>
+		<script src="/src/contenteditable/keyboard_input.js"></script>
+		<script src="/src/contenteditable/markup_normalization.js"></script>
+		<script src="/src/contenteditable/pasting_media.js"></script>
+		<script src="/src/contenteditable/undo_redo.js"></script>
+		<script src="/src/contenteditable/undo_redo_detection.js"></script>
+
+		<script src="/src/dd_container/dragging_items.js"></script>
+		<script src="/src/dd_container/dropping_files.js"></script>
+		<script src="/src/dd_container/hit_testing.js"></script>
+		<script src="/src/dd_container/item_placeholder.js"></script>
+		<script src="/src/dd_container/item_positioning.js"></script>
+
+		<script src="/src/dd_container_adapter.js"></script>
+		<script src="/src/firefox_layout_adapter.js"></script>
+		<script src="/src/floating_markup_panel.js"></script>
+		<script src="/src/content_api.js"></script>
+
+		<script>
+			LogOverlay.init ()
+
+			DemoEditor = $component ({
+
+				/*	This is various behaviours (traits) that make up Wyg
+				 */
+			    $traits: [
+
+			        DOMReference,
+			        DOMEvents,
+			        DOMTotalRecall,
+
+			        DDContainer_ItemPositioning,
+			        DDContainer_ItemPlaceholder,
+			        DDContainer_HitTesting,
+			        DDContainer_DraggingItems,
+			        DDContainer_DroppingFiles,
+
+			        ContentEditable_ExecCommand,
+			        ContentEditable_UndoRedoDetection,
+			        ContentEditable_UndoRedo,
+			        ContentEditable_MarkupNormalization,
+			        ContentEditable_KeyboardInput,
+			        ContentEditable_PastingMedia,
+			        
+			        Wyg_ContentAPI,
+			        Wyg_DDContainerAdapter,
+			        Wyg_FirefoxLayoutAdapter,
+			        Wyg_FloatingMarkupPanel
+			    ],
+
+			    /*	Traits configuration
+			     */
+			    $defaults: {
+
+			        padding: 10,
+
+			        allowedTags: {
+			            b     : {},
+			            em    : {},
+			            strong: {},
+			            irony : {},
+			            i     : {},
+			            u     : {} },
+
+			        buttons: {
+			            'irony': { click: function () { this.toggleWrapSelectionIn ('irony') } } },
+
+			        buttonsBar: ['bold',
+			                     'italic',
+			                     'underline',
+			                     'irony'] },
+
+			    /*	Entry point
+			     */
+			    init: function () {
+			        this.domReady ((this.dom || Node.div).attr ({
+					                           		          class: 'wyg',
+					                                contenteditable:  true,
+					                                     spellcheck:  false })) },
+
+			    /*	Demo implementation of some app-specific APIs, as Wyg itself doesn't know how upload files,
+			    	display icons and work with media URIs.
+			     */
+			    mediaPlayer: function (url) {
+			        var match = url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/)
+			        var id = match && (match[7].length == 11) && match[7]
+		        	if (id) {
+		        		return Node.div
+		        					.extend ({ ddData: { originalSize: Vec2.xy (16000, 9000) } })
+			        				.append (
+			        					Node.iframe.attr ({ src: '//www.youtube.com/embed/' + id + '?wmode=transparent', frameborder: 0 })) } },
+
+			    makeAddIcon: function () {
+			        return _.extend (Node.div, {
+			        					className: 'wyg-icon',
+			        					innerHTML: '<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  width="216px" height="146px" viewBox="0 0 216 146" enable-background="new 0 0 216 146" xml:space="preserve"><path d="M162.18,41.592c-5.595-9.586-13.185-17.176-22.771-22.771c-9.588-5.595-20.055-8.392-31.408-8.392 c-11.352,0-21.822,2.797-31.408,8.392c-9.587,5.594-17.177,13.184-22.772,22.771C48.225,51.179,45.428,61.649,45.428,73 c0,11.352,2.798,21.82,8.392,31.408c5.595,9.585,13.185,17.176,22.772,22.771c9.587,5.595,20.056,8.392,31.408,8.392 c11.352,0,21.822-2.797,31.408-8.392c9.586-5.594,17.176-13.185,22.771-22.771c5.594-9.587,8.391-20.057,8.391-31.408 C170.57,61.648,167.773,51.178,162.18,41.592z M144.5,78.214c0,1.412-0.516,2.636-1.549,3.667c-1.032,1.031-2.254,1.548-3.666,1.548 h-20.857v20.856c0,1.412-0.517,2.635-1.548,3.667c-1.032,1.032-2.254,1.548-3.666,1.548h-10.429c-1.412,0-2.634-0.516-3.666-1.548 c-1.032-1.032-1.548-2.255-1.548-3.667V83.429H76.714c-1.412,0-2.634-0.517-3.666-1.548c-1.032-1.031-1.548-2.255-1.548-3.667 V67.785c0-1.412,0.516-2.634,1.548-3.666c1.032-1.032,2.254-1.548,3.666-1.548h20.858V41.714c0-1.412,0.516-2.634,1.548-3.666 c1.032-1.032,2.254-1.548,3.666-1.548h10.429c1.412,0,2.635,0.516,3.666,1.548c1.031,1.032,1.549,2.254,1.549,3.666v20.857h20.856 c1.412,0,2.634,0.516,3.666,1.548c1.032,1.032,1.548,2.254,1.548,3.666V78.214z"/></svg>' }) },
+
+			    makeWaitIcon: function () {
+			        return _.extend (Node.div, {
+			        					className: 'wyg-icon',
+			        					innerHTML: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"> <path d="M15.05,11.888c-0.268-0.055-0.535,0.118-0.59,0.39c-0.426,2.082-2.281,3.594-4.41,3.594c-2.481,0-4.5-2.019-4.5-4.5 c0-2.649,1.851-4.5,4.5-4.5c0.554,0,1.383,0.002,2.051,0.005L9.361,8.975c-0.22,0.168-0.261,0.481-0.093,0.7 c0.098,0.129,0.247,0.196,0.396,0.196c0.106,0,0.214-0.033,0.304-0.104l3.78-2.896c0.123-0.095,0.197-0.242,0.195-0.398 c0-0.156-0.074-0.304-0.199-0.397l-3.78-2.847c-0.219-0.164-0.532-0.123-0.7,0.099c-0.166,0.221-0.122,0.534,0.099,0.7l2.454,1.848 c-0.609-0.002-1.29-0.004-1.768-0.004c-3.187,0-5.5,2.313-5.5,5.5c0,3.032,2.468,5.5,5.5,5.5c2.602,0,4.869-1.848,5.391-4.393 C15.495,12.208,15.321,11.943,15.05,11.888z"/></svg>' }) },
+
+			    uploadImage: function (file, then) {
+			    	API.uploadFile ('/api/upload', file, function (response) {
+			    		Image.fetch ('/uploads/' + response.id + '.jpg')
+			    		     .done (then, function (e) { Panic (e); then (undefined) }) }) },
+
+			    /*	$on gets it auto unbinded upon destroy (feature of DOMEvents trait)
+			     */
+    			preventsPageReloadWhenDroppingFile: $on ({ what: 'drop', target: document },
+    													function (e) {
+    														e.preventDefault () }),
+			})
+		</script>
+
+	</head>
+	<body>
+		<main>
+			<h1>Wyg Editor</h1>
+			<div id="put-editor-here"></div>
+			<script>
+				wyg = new DemoEditor ({ dom: document.getElementById ('put-editor-here') })
+			</script>
+			<div style="opacity: 0.5; margin-top: 1em; text-align: right; font-size: 11px">
+				NB: in this demo, the only video type supported is YouTube
+			</div>
+		</main>
+	</body>
+</html>
