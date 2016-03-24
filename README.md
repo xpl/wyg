@@ -10,7 +10,7 @@ First public beta (still many bugs to fix). Docs are pending.
 - Drag & drop media between paragraphs
 - Arranges media nicely in columns
 - Pasted links get converted to media blocks instantly
-- Floating markup panel with custom tags
+- Floating markup panel with custom tags support
 - Custom undo/redo manager (works with arbitrary DOM changes)
 - Intercepts native undo/redo commands (not limited to hotkeys)
 
