@@ -5,10 +5,12 @@ First public beta (still many bugs to fix). Docs are pending.
 
 - Built entirely from scratch
 - Works better than anything before
-- Splits text to paragraphs automatically
+- Minimalistic UI, blazingly fast (works with DOM nodes directly)
+- Normalizes entered markup on the fly (splits paragraphs with linebreaks)
 - Smart linebreak management (no Shift-Enter required to put a newline)
 - Drag & drop media between paragraphs
 - Arranges media nicely in columns
+- Fluid layout with animations
 - Pasted links get converted to media blocks instantly
 - Floating markup panel with custom tags support
 - Custom undo/redo manager (works with arbitrary DOM changes)
