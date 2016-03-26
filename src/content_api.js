@@ -87,4 +87,16 @@ Wyg_ContentAPI = $trait ({
                                                                                         p.toggleAttribute ('data-empty', isEmpty)
                                                                                         return allEmpty && isEmpty }) },
 
+
+/*  Creates a context within whose all animations are supressed.
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+    supressAnimations: function (ctx) {
+        if (this.dom) {
+            this.dom.setAttribute ('noanimate', this.animationsSupressed = (this.animationsSupressed || 0) + 1) }
+        ctx.call (this, this.$ (function () {
+            if ((this.animationsSupressed = this.animationsSupressed - 1) === 0) {
+                if (this.dom) {
+                    this.dom.removeAttribute ('noanimate') } } })) },
+
 })

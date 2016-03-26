@@ -4,6 +4,8 @@
 			body { font-family: Verdana, sans-serif; padding: 50px; font-size: 14px; }
 			h1 { font-weight: normal; letter-spacing: -0.04em; font-size: 40px; }
 			main { margin: 0 auto; max-width: 700px; min-width: 100px; }
+			#put-editor-here > pre { font-size: 11px; margin: 0; padding: 0; }
+			.wyg:focus p[data-empty]:last-child:before { content: 'You can drag images and paste media links (YouTube, images).'; }
 		</style>
 
 		<!-- Wyg CSS -->
@@ -146,7 +148,7 @@
     													function (e) {
     														e.preventDefault () }),
 			})
-		</script>
+ 		</script>
 
 	</head>
 	<body>
@@ -154,11 +156,40 @@
 			<h1>Wyg Editor</h1>
 			<div id="put-editor-here"></div>
 			<script>
-				wyg = new DemoEditor ({ dom: document.getElementById ('put-editor-here') })
+
+				var whereToPutEditor = document.getElementById ('put-editor-here')
+
+				function initDemoEditor () {
+					wyg = new DemoEditor ({ dom: whereToPutEditor }) }
+
+				var runUnitTests = true		        
+		        if (runUnitTests) {
+
+	                Testosterone.run ({
+
+	                	/*	Filter
+	                	 */
+	                    //filter: function (t) { return t.proto === ContentEditable_KeyboardInput },
+	                    //filter: function (t) { return t.suite === 'NodePlus' },
+
+	                    /*	Options
+	                     */
+	                    verbose: false,
+	                    indent: -1,
+	                    silent: true,
+	                    supressLog: true,
+
+	                    /*	Tests progress
+	                     */
+	                	testStarted:  function (t)       { whereToPutEditor.append (t.el = Node.pre.append ('Running test: ' + t.name + '… ')) },
+	                	testComplete: function (t, then) { 						    t.el.append (t.failed ? 'FAIL' : 'OK'); _.delay (then) } },
+
+                        /*	After tests done
+                         */
+                        function () {
+                            Testosterone.failedTests.reversed.each (Panic.arity1)
+                            initDemoEditor () }) }
 			</script>
-			<div style="opacity: 0.5; margin-top: 1em; text-align: right; font-size: 11px">
-				NB: in this demo, the only video type supported is YouTube
-			</div>
 		</main>
 	</body>
 </html>

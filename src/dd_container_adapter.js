@@ -35,17 +35,7 @@ Wyg_DDContainerAdapter = $trait ({
 
     makeRowPlaceholder: function () {
         return $('<p contenteditable="false" class="dd-row placeholder" no-history>') },
-
-
-/*  Creates a context within whose all animations are supressed.
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-
-    supressAnimations: function (ctx) {
-        this.dom.setAttribute ('noanimate', this.animationsSupressed = (this.animationsSupressed || 0) + 1)
-        ctx.call (this, this.$ (function () {
-            if ((this.animationsSupressed = this.animationsSupressed - 1) === 0) {
-                this.dom.removeAttribute ('noanimate') } })) },
-
+        
 
 /*  Binds to isDragging, creating $customCommand context for the entire
     drag operation.
