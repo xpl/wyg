@@ -12,7 +12,6 @@ First public beta (still many bugs to fix). Docs are pending.
 - Insert media by simply pasting links into text
 - Arranges media nicely in columns
 - Fluid layout with animations
-- Pasted links get converted to media blocks instantly
 - Floating markup panel with custom tags support
 - Custom undo/redo manager (works with arbitrary DOM changes)
 - Intercepts native undo/redo commands (not limited to hotkeys)
