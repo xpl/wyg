@@ -9,6 +9,7 @@ First public beta (still many bugs to fix). Docs are pending.
 - Normalizes entered markup on the fly (splits paragraphs with linebreaks)
 - Smart linebreak management (no Shift-Enter required to put a newline)
 - Drag & drop media between paragraphs
+- Insert media by simply pasting links into text
 - Arranges media nicely in columns
 - Fluid layout with animations
 - Pasted links get converted to media blocks instantly
