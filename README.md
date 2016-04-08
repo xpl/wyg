@@ -15,6 +15,7 @@ First public beta (still many bugs to fix). Docs are pending.
 - Floating markup panel with custom tags support
 - Custom undo/redo manager (works with arbitrary DOM changes)
 - Intercepts native undo/redo commands (not limited to hotkeys)
+- Developed with test-driven ideology ([showcase](https://www.youtube.com/watch?v=IWLE8omFnQw))
 
 Watch demo on YouTube: [youtube.com/watch?v=u1wNfSHwSQA](https://www.youtube.com/watch?v=u1wNfSHwSQA)
 
