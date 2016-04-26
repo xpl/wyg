@@ -64,13 +64,12 @@ ContentEditable_UndoRedo = $trait ({
                     Schwarzenegger = Schwarzenegger || $component ({
 
                         $defaults: {
-                            value: {
-                                blocks: [
-                                    { type: 'p',
-                                      html: '12345' },
+                            value: [
+                                { type: 'p',
+                                  html: '12345' },
 
-                                    { type: 'p',
-                                      html: '6789' } ] } },
+                                { type: 'p',
+                                  html: '6789' } ] },
 
                         $traits: [  Testosterone.ValidatesRecursion,
                                     Testosterone.LogsMethodCalls,

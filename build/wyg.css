@@ -72,7 +72,8 @@
 .dd-container .dd-item { background-size: cover; background-position: center center; background-repeat: no-repeat; }
 
 .dd-container .dd-item.removing { opacity: 0.2 !important; }
-.dd-container .dd-item.disappear {
+.dd-container .dd-item.disappear,
+.dd-container .dd-item[disappear] {
             animation: bounce-zoom 0.25s ease-in-out;         animation-direction: reverse;
     -webkit-animation: bounce-zoom 0.25s ease-in-out; -webkit-animation-direction: reverse; }
 

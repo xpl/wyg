@@ -14,8 +14,7 @@ ContentEditable_ExecCommand = $trait ({
                     return this.insertHTML (_.map (s.split ('\n'), _.escaped).join ('<br>')) },
 
     insertHTML: function (s) {
-                        var result = this.execCommand ('insertHTML', s)
-                    return  result },
+                    return this.execCommand ('insertHTML', s) },
 
     execCommand: $log ($bindable (function (name, value) { if (!Range.isWithinNode (Range.current, this.dom)) { this.dom.moveCaret () }
 
