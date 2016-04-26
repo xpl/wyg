@@ -42,7 +42,8 @@ $mixin (Range, {
             node removal and normalization. Anyway, if it's not needed, following method will fit well.
      */
     survives: $static (function (apocalypse) {                  var range = Range.current
-                                 apocalypse ();     Range.current = range }),
+                                 apocalypse ();     Range.current = range
+                                                             return range }),
     
     wrapIn: function (node) {
         this.insertNode (node.appendChildren (this.extractContents ()))

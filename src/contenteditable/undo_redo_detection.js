@@ -227,8 +227,14 @@ ContentEditable_UndoRedoDetection = $trait ({
                                         if (this.dom.isAttachedToDocument) { // wont work if detached from document DOM, as it relies on selection mechanics
                                             var p = this.firstTextParagraph
                                             if (p) {
-                                                Range.survives (this.emitUndoTrap.$ (p).then (
-                                                                this.emitRedoTrap.$ (p))) } } })),
+                                                var range = Range.survives (this.emitUndoTrap.$ (p).then (
+                                                                            this.emitRedoTrap.$ (p)))
+
+                                                /*  Un-focus if restored range is outside (otherwise it breaks focus state consistency)
+                                                 */
+                                                if (!range || !range.isWithinNode (this.dom)) {
+                                                    if (this.dom === document.activeElement) {
+                                                        this.dom.blur () } } } } })),
 
     /*  Insert then delete → native undo will make the trap reappear
      */

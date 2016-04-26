@@ -3,9 +3,6 @@
 
 Wyg_ContentAPI = $trait ({
 
-    $requires: {
-        mediaPlayer: 'function' },
-
     $defaults: {
         value: [] },
 
@@ -17,6 +14,11 @@ Wyg_ContentAPI = $trait ({
     isEmpty: $observableProperty (true, function (value) {
                                             this.domReady (function (dom) {
                                                                      dom.toggleAttribute ('data-empty', value) }) }),
+
+
+    /*  Override this to implement URL embedding
+     */
+    mediaPlayer: function (url) { return null },
 
 
     /*  This is used for testing/debugging purposes, to set/extract legit content use 'value' property
