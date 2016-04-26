@@ -6,9 +6,6 @@ ContentEditable_PastingMedia = $trait ({
 /*  API
     ======================================================================== */
 
-    $requires: {
-        mediaPlayer: 'function' },
-
     $defaults: {
         allowedTags: {
             a: { href: true,
@@ -19,12 +16,12 @@ ContentEditable_PastingMedia = $trait ({
          if (mp) { this.mediafy     (a, mp) }
             else { this.turnBusy    (a, true)
                         Image.fetch (a.href)
-                             .done (
-                                 this.$ (function (img) { this.mediafy  (a, img, { originalSize: Vec2.xy (img.width, img.height) }) }),
+                             .then (
+                                 this.$ (function (img) { this.mediafy  (a, img) }),
                                  this.$ (function ()    { this.turnBusy (a, false) })) } },
 
     nodeChanged: function (node) {
-        if (node.isHyperlink && node.href) {
+        if (node.isHyperlink && node.href && node.getAttribute ('pasted')) {
             if (!node.scheduledForMediafying) {
                  node.scheduledForMediafying = true
                  this.scheduleForMediafying (node) } } },
@@ -63,10 +60,16 @@ ContentEditable_PastingMedia = $trait ({
                     parser.href = txt
                 if (parser.hostname) { return parser } } },
 
-
-    embedURL: function (url) { var escaped = _.escape (url)
-        this.insertHTML ('<a href="' + escaped + '">' + escaped + '</a>')
-        this.cleanupEmptyParagraphLeftAfterVideoIsInserted () },
+    embedURL: function (url) {
+        var range = Range.current
+        if (range &&
+           !range.collapsed &&
+            range.isWithinNode (this.dom)) {
+            this.execCommand ('createLink', url) }
+        else {
+            var escaped = _.escape (url)
+            this.insertHTML ('<a pasted="true" href="' + escaped + '">' + escaped + '</a>')
+            this.cleanupEmptyParagraphLeftAfterVideoIsInserted () } },
 
     cleanupEmptyParagraphLeftAfterVideoIsInserted: $customCommand (function () { // fixes nasty glitch, happens for unknown reason... this is simple workaround
         var p = this.currentParagraph

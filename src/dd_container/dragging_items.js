@@ -104,7 +104,8 @@ DDContainer_DraggingItems = $trait ({
 
     initDragForItem: function (item) { var prevHit     = undefined,
                                            isLeftmost  = false,
-                                           isRightmost = false
+                                           isRightmost = false,
+                                           item        = $(item)
 
                         return item.addClass ('dd-item').drag ({
 
@@ -138,7 +139,7 @@ DDContainer_DraggingItems = $trait ({
                                                 _.delay (function () { item.removeClass ('drag') });
 
                                                 if (item.hasClass ('removing')) {
-                                                    item.animateWith ('disappear', function () {
+                                                    item[0].animateWithAttribute ('disappear').timeout (1000).then (function () {
                                                         item.removeClass ('removing')
                                                         if (item.parent ().hasClass ('removing')) {
                                                             item.parent ().removeClass ('removing').detach () }

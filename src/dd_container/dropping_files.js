@@ -65,7 +65,7 @@ DDContainer_DroppingFiles = $trait ({
 
         var withFileUpload = this.$ (function (file, target) { return this.$ (function () {
 
-            this.uploadFile (file, this.$ (function (el) {
+            this.uploadFile (file).done (this.$ (function (e, el) {
 
                 if (el) {
                     this.initDragForItem (el)

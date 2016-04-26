@@ -3,23 +3,23 @@
 
 Wyg_ContentAPI = $trait ({
 
-    /*  Defines empty prompt paragraph as default value
-     */
+    $requires: {
+        mediaPlayer: 'function' },
+
     $defaults: {
-        value: {
-            blocks: [{  type:  'p',
-                        html: '<br>' }] } },
+        value: [] },
 
     /*  Bind to this to get notified on content modifications
      */
     contentReseted: $trigger (),
     contentChanged: $trigger ($on ('input', function () { this.updateEmptyStatus () })),
 
-    isEmpty: $observableProperty (true, function (value) { this.domReady (function (dom) {
-                                                                                    dom.toggleAttribute ('data-empty', value) }) }),
+    isEmpty: $observableProperty (true, function (value) {
+                                            this.domReady (function (dom) {
+                                                                     dom.toggleAttribute ('data-empty', value) }) }),
 
 
-    /*  This is used for testing/debugging purposes, to set/extract legit content use 'value' property (not fully implemented yet)
+    /*  This is used for testing/debugging purposes, to set/extract legit content use 'value' property
      */
     html: $property ({
         
@@ -35,24 +35,44 @@ Wyg_ContentAPI = $trait ({
      */
     value: $property ({
 
-        get: _.notImplemented, // TODO: implement
+        get: function () {
+                return this.nonemptyParagraphs.map (this.$ (function (p) {
+                                                                return p.isDDRow
+                                                                            ? { type: 'media', media: p.childNodesArray.map (this.mediaNodeValue) }
+                                                                            : { type: 'p', html: p.innerHTML } })) },
 
-        set: function (value) {
+        set: function (blocks) {
                 this.historyReady (function () {
                     this.resetContent (function () { var $ = jQuery
                         this.supressAnimations (function (done) {
-                            this.dom.appendChildren (value.blocks.map (this.renderValueBlock))
+                            this.dom.appendChildren ((_.coerceToUndefined (blocks) || [{ type: 'p', html: '<br>' }]).map (this.renderValueBlock))
                             done.postpone () }) }) }) } }),
+
+    mediaNodeValue: function (n) {
+        return _.nonempty ({
+                  type: (n.tagName === 'IMG') ? 'img' : 'embed',
+          originalSize:  n.ddData.originalSize.asWidthHeight,
+          relativeSize:  { width: n.ddData.size.w / n.parentNode.ddData.innerSize.w, height: 1.0 / n.ddData.originalSize.aspect },
+                   src:  n.src,
+                  html:  n.innerHTML || undefined }) },
 
     renderValueBlock: function (block) {
                             switch (block.type) {
                                 case 'p':
                                     return _.extend (Node.paragraph, { innerHTML: block.html })
-                                case 'images':
-                                    return $('<p id="dd-demo" class="dd-row" contenteditable="false">').append (
-                                        _.map (block.images, function (img) {
-                                            return this.initDragForItem ($('<img>').attr (img).ddData ({
-                                                originalSize: Vec2.xy (img.width, img.height) })) }, this))[0] } },
+                                case 'media':
+                                    return Node.paragraph
+                                                .cls ('dd-row')
+                                                .attr ({ contenteditable: false })
+                                                .append (_.map (block.media, this.renderMedia)) } },
+
+    renderMedia: function (media) {
+
+        var node = (media.type === 'img')
+                        ? Node.img.attr ({ src: media.src, width: media.originalSize.width, height: media.originalSize.height })
+                        : this.mediaPlayer (media.src)
+
+        return this.initDragForItem (node.extend ({ ddData: { originalSize: Vec2.wh (media.originalSize) }}))[0] },
 
     /*  Use this for resetting content with custom fill actions
      */
@@ -80,6 +100,9 @@ Wyg_ContentAPI = $trait ({
                                 return _.filter (this.dom.childNodes, function (n) {
                                     return n.isParagraph &&
                                           !n.isDDPlaceholder }) }),
+
+    nonemptyParagraphs: $property (function () {
+        return _.reject (this.paragraphs, _.property ('isEmptyParagraph')) }),
 
     updateEmptyStatus: function () {
                             this.isEmpty = _.reduce2 (true, this.paragraphs, function (allEmpty, p) {
