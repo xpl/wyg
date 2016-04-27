@@ -4,6 +4,9 @@
 
 Wyg_DDContainerAdapter = $trait ({
 
+    $defaults: {
+        paragraphMargin: 18 },
+
 /*  Source of a width and height metrics
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
@@ -23,7 +26,7 @@ Wyg_DDContainerAdapter = $trait ({
                                                                     if (n.isParagraph && !n.isDDRow) {
                                                                         n.ddData = {
                                                                             originalSize: Vec2.xy (this.width, $(n).extent ().y),
-                                                                            margin: 18 } } }))
+                                                                            margin: this.paragraphMargin } } }))
                             this.layout () }) },
 
     uploadFile: function (file) {
