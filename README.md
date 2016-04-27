@@ -27,7 +27,7 @@ In it's current state the stuff is quite unusable. Things to be done:
 - Safari compatibility (some tests fail).
 - MS Edge compatibility.
 - Implement hyperlink editing in the floating markup panel.
-- JSON serialization
+- Add build script
 
 ## Running demo
 
