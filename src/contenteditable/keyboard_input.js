@@ -23,7 +23,7 @@ ContentEditable_KeyboardInput = $trait ({
                                  if ((e.keyCode === KeyCodes.Backspace))                  { this.doBackspace      () ; e.preventDefault () }
                             else if ((e.keyCode === KeyCodes.Esc))                        { this.escapeKeyPressed () ; e.preventDefault () }
                             else if ((e.keyCode === KeyCodes.A) && e.metaKey)             { this.doSelectAll      () ; e.preventDefault () }
-                            else if ((e.keyCode === KeyCodes.Enter) && !Platform.Firefox) { this.doCaretReturn    () ; e.preventDefault () } }),
+                            else if ((e.keyCode === KeyCodes.Enter) && !$platform.Firefox) { this.doCaretReturn    () ; e.preventDefault () } }),
     $bindable: {
 
           doSelectAll: function () { Range.current = Range.withinNode (this.currentParagraph) },

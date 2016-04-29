@@ -87,8 +87,8 @@ ContentEditable_UndoRedo = $trait ({
                             this.domReady (Node.div .toggleAttribute ('contenteditable', true)
                                                     .insertMeAfter (document.body.lastChild)) },
 
-                        undo: $log (function () { if (Platform.Safari) { this.undoHappened () } else { this.execCommand ('undo') } }),
-                        redo: $log (function () { if (Platform.Safari) { this.redoHappened () } else { this.execCommand ('redo') } }),
+                        undo: $log (function () { if ($platform.Safari) { this.undoHappened () } else { this.execCommand ('undo') } }),
+                        redo: $log (function () { if ($platform.Safari) { this.redoHappened () } else { this.execCommand ('redo') } }),
 
                         contentChanged: function () {
                             log.green (log.indent (1), '→', this.html) } })

@@ -1,4 +1,4 @@
-if (Platform.Safari) {
+if ($platform.Safari) {
 
 /*  The most obvious impl (does not detect menu actions).
     ======================================================================== */

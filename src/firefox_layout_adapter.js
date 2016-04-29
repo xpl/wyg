@@ -1,4 +1,4 @@
-Wyg_FirefoxLayoutAdapter = !Platform.Firefox ? $trait () : $trait ({
+Wyg_FirefoxLayoutAdapter = !$platform.Firefox ? $trait () : $trait ({
 
 /*  Firefox has nasty resizing handles for absolute-positioned elements
     contained within a contenteditable. There's no way to disable them.
