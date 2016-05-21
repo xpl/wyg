@@ -20,7 +20,6 @@ App = $singleton (Component, {
 
     $depends: [
         require ('useless/server/supervisor'),
-        require ('useless/server/request'),
         require ('useless/server/http'),
         require ('useless/server/uploads') ],
 
