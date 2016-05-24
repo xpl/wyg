@@ -13,7 +13,7 @@ App = $singleton (Component, {
             this.file ('./demo.html'),
 
         'api/upload': {
-            post: this.uploadImageTo ('./uploads') },
+            post: this.uploadImageTo.$ ('./uploads') },
 
         ':file':
             this.file ('./') } },
