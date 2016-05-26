@@ -197,7 +197,7 @@ DOMTotalRecall = $trait ({
 
     pushesMutation: function (MutationConstructor) {
                         return this.$ (function (node, args) {
-                            this.pushMutation (_.new_.$ (MutationConstructor, 1 + this.mutationHistoryCursor).apply (null, arguments)) }) },
+                            this.pushMutation (_.new.$ (MutationConstructor, 1 + this.mutationHistoryCursor).apply (null, arguments)) }) },
 
     pushMutation: $bindable (function (m) { 
 
