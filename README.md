@@ -23,11 +23,11 @@ Watch demo on YouTube: [youtube.com/watch?v=u1wNfSHwSQA](https://www.youtube.com
 
 In it's current state the stuff is quite unusable. Things to be done:
 
-- Fix critical bugs in drag & drop interaction.
 - Safari compatibility (some tests fail).
 - MS Edge compatibility.
 - Implement hyperlink editing in the floating markup panel.
-- Add build script
+- Fix nonworking plus button (should trigger file open dialog).
+- Add build script.
 
 ## Running demo
 
