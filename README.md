@@ -36,6 +36,7 @@ You will need `node` and `npm`.
 1. Clone repo with `git clone http://github.com/xpl/wyg`
 2. Run `npm install` to install dependencies.
 3. Run `node demo.js`
+4. Open `localhost:1333` in Chrome (Safari / Firefox / Edge support is coming)
 
 ### Updating demo
 
