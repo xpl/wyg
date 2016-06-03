@@ -23,11 +23,11 @@ Watch demo on YouTube: [youtube.com/watch?v=u1wNfSHwSQA](https://www.youtube.com
 
 In it's current state the stuff is quite unusable. Things to be done:
 
-- Fix critical bugs in drag & drop interaction.
 - Safari compatibility (some tests fail).
 - MS Edge compatibility.
 - Implement hyperlink editing in the floating markup panel.
-- Add build script
+- Fix nonworking plus button (should trigger file open dialog).
+- Add build script.
 
 ## Running demo
 
@@ -36,6 +36,7 @@ You will need `node` and `npm`.
 1. Clone repo with `git clone http://github.com/xpl/wyg`
 2. Run `npm install` to install dependencies.
 3. Run `node demo.js`
+4. Open `localhost:1333` in Chrome (Safari / Firefox / Edge support is coming)
 
 ### Updating demo
 
