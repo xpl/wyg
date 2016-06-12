@@ -88,7 +88,9 @@ images: $parseMedia (function (url) {
                                           src:  url,
                                  originalSize: { width: img.width,
                                                 height: img.height } } }) }),
-                                                
+```
+
+```javascript
 youtube: $parseMedia (function (url) {
             var match = url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/)
             var id = match && (match[7].length == 11) && match[7]
