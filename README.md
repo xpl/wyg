@@ -23,11 +23,12 @@ Watch demo on YouTube: [youtube.com/watch?v=u1wNfSHwSQA](https://www.youtube.com
 
 In it's current state the stuff is quite unusable. Things to be done:
 
-- Safari compatibility (some tests fail).
-- MS Edge compatibility.
-- Implement hyperlink editing in the floating markup panel.
-- Fix nonworking plus button (should trigger file open dialog).
-- Add build script.
+- [ ] Get rid of jQuery (moving to the [`Node+`](https://github.com/xpl/useless/blob/master/client/node%2B.js) library)
+- [ ] Safari compatibility (some tests fail).
+- [ ] MS Edge compatibility.
+- [ ] Implement hyperlink editing in the floating markup panel.
+- [ ] Fix nonworking plus button (should trigger file open dialog).
+- [ ] Add build script.
 
 ## Running demo
 
@@ -44,7 +45,7 @@ Instead of `git pull`, use `./update.sh` (runs `git pull && npm update`). This i
 
 ## Under the hood
 
-Everything is built upon a JS library called [Useless.js](https://github.com/xpl/useless) (working title). It delivers composable [traits](https://github.com/xpl/useless/wiki/%24trait) support to JavaScript and a powerful unit test system. You may read more about it in the [project's wiki](https://github.com/xpl/useless/wiki).
+Everything is built upon a JS library called [Useless.js](https://github.com/xpl/useless) (working title). It delivers composable [traits](https://github.com/xpl/useless/wiki/%24trait) support to JavaScript and a powerful unit test system. You may read more about it in the [project's wiki](https://github.com/xpl/useless/wiki). DOM operations are based on the [Node+](https://github.com/xpl/useless/blob/master/client/node%2B.js) library (coming with Useless).
 
 ## Adding support of new media types
 
