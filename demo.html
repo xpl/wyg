@@ -56,8 +56,8 @@
 
             DemoEditor = $component ({
 
-                /*  This is various behaviours (traits) that make up Wyg
-                 */
+            /*  This is various behaviours (traits) that make up Wyg  */
+
                 $traits: [
 
                     DOMReference,
@@ -86,8 +86,9 @@
                     Wyg_FloatingMarkupPanel
                 ],
 
-                /*  Traits configuration
-                 */
+
+            /*  Traits configuration  */
+
                 $defaults: {
 
                     padding: 10,
@@ -108,25 +109,16 @@
                                  'underline',
                                  'irony'] },
 
-                /*  Entry point
-                 */
+            /*  Entry point  */
+
                 init: function () {
                     this.domReady ((this.dom || Node.div).attr ({
                                                               class: 'wyg',
                                                     contenteditable:  true,
                                                          spellcheck:  false })) },
 
-                /*  Demo implementation of some app-specific APIs, as Wyg itself doesn't know how upload files,
-                    display icons and work with media URIs.
-                 */
-                mediaPlayer: function (url) {
-                    var match = url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/)
-                    var id = match && (match[7].length == 11) && match[7]
-                    if (id) {
-                        return Node.div
-                                    .extend ({ ddData: { originalSize: Vec2.xy (16000, 9000) } })
-                                    .append (
-                                        Node.iframe.attr ({ src: '//www.youtube.com/embed/' + id + '?wmode=transparent', frameborder: 0 })) } },
+            /*  Demo implementation of some app-specific APIs, as Wyg itself doesn't know how
+                to upload files and how to display icons: */
 
                 makeAddIcon: function () {
                     return _.extend (Node.div, {
@@ -142,8 +134,8 @@
                     return JSONAPI.uploadFile ('upload', file).then (function (response) {
                         return Image.fetch ('/uploads/' + response.id + '.jpg') }).panic },
 
-                /*  $on gets it auto unbinded upon destroy (feature of DOMEvents trait)
-                 */
+            /*  $on gets it auto unbinded upon destroy (feature of DOMEvents trait)  */
+            
                 preventsPageReloadWhenDroppingFile: $on ({ what: 'drop', target: document },
                                                         function (e) {
                                                             e.preventDefault () }),
