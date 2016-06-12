@@ -107,7 +107,7 @@
 
 .dd-container .dd-item { display: block; box-sizing: border-box; }
 
-.dd-container:not([noanimate]) .dd-item:not(.drag):not(.appear):not([appear]),
+.dd-container:not([noanimate]) .dd-item:not(.drag):not(.appear)
 .dd-container:not([noanimate]) > * {
 
     -webkit-transition:
@@ -122,8 +122,7 @@
         width 0.2s ease-in-out,
         height 0.2s ease-in-out; }
 
-.dd-container .dd-item.appear,
-.dd-container .dd-item[appear] {
+.dd-container .dd-item.appear {
     -webkit-animation: bounce-zoom 0.25s ease-in-out;
             animation: bounce-zoom 0.25s ease-in-out; }
 
