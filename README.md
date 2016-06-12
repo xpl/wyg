@@ -141,7 +141,9 @@ img: $renderMedia (function (media) {
         return Node.img.attr ({ src: media.src,
                               width: media.originalSize.width,
                              height: media.originalSize.height }) }),
+```
 
+```javascript
 iframe: $renderMedia (function (media) {
             return Node.div.append (
                    Node.iframe.attr ({ src: media.src, frameborder: 0, allowfullscreen: true })) } }),
