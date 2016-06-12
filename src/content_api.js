@@ -16,11 +16,6 @@ Wyg_ContentAPI = $trait ({
                                                                      dom.toggleAttribute ('data-empty', value) }) }),
 
 
-    /*  Override this to implement URL embedding
-     */
-    mediaPlayer: function (url) { return null },
-
-
     /*  This is used for testing/debugging purposes, to set/extract legit content use 'value' property
      */
     html: $property ({
@@ -51,12 +46,9 @@ Wyg_ContentAPI = $trait ({
                             done.postpone () }) }) }) } }),
 
     mediaNodeValue: function (n) {
-        return _.nonempty ({
-                  type: (n.tagName === 'IMG') ? 'img' : 'embed',
-          originalSize:  n.ddData.originalSize.asWidthHeight,
-          relativeSize:  { width: n.ddData.size.w / n.parentNode.ddData.innerSize.w, height: 1.0 / n.ddData.originalSize.aspect },
-                   src:  n.src,
-                  html:  n.innerHTML || undefined }) },
+        return _.nonempty (_.extended (n.wygMediaData, {
+                                            relativeSize: { width: n.ddData.size.w / n.parentNode.ddData.innerSize.w,
+                                                            height: 1.0 / n.ddData.originalSize.aspect } })) },
 
     renderValueBlock: function (block) {
                             switch (block.type) {
@@ -67,14 +59,6 @@ Wyg_ContentAPI = $trait ({
                                                 .cls ('dd-row')
                                                 .attr ({ contenteditable: false })
                                                 .append (_.map (block.media, this.renderMedia)) } },
-
-    renderMedia: function (media) {
-
-        var node = (media.type === 'img')
-                        ? Node.img.attr ({ src: media.src, width: media.originalSize.width, height: media.originalSize.height })
-                        : this.mediaPlayer (media.src)
-
-        return this.initDragForItem (node.extend ({ ddData: { originalSize: Vec2.wh (media.originalSize) }}))[0] },
 
     /*  Use this for resetting content with custom fill actions
      */
