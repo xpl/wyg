@@ -50,7 +50,7 @@ Everything is built upon a JS library called [Useless.js](https://github.com/xpl
 
 ### Media lifecycle
 
-All incoming URLs that are pasted from clipboard go through media type parsing facility (`parseMedia`). This function converts URLs to abstract media definitions in JSON format. Those definitions, when serialized, can be easily stored/interpreted by external applications (e.g. template engines, when rendering to static HTML at server side).
+All incoming URLs that are pasted from clipboard go through `parseMedia` facility. This function converts URLs to abstract media definitions in JSON format. Those definitions, when serialized, can be easily stored/interpreted by external applications (e.g. template engines, when rendering to static HTML at server side).
 
 Example:
 
@@ -68,7 +68,7 @@ Rendered output will be:
   originalSize: { width: ..., height: ... } }
 ```
 
-This is then feeded to the media rendering facility (`renderMedia`), which processes those definitions, producing DOM elements:
+This is then feeded to the media rendering facility, which processes those definitions, producing DOM elements:
 
 ```javascript
 this.renderMedia (def) // produces DOM element from that definition
