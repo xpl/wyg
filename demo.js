@@ -28,4 +28,5 @@ App = $singleton (Component, {
 
 
     init: function () {
+            require ('useless/server/base/fs').mkdir ('uploads')
             log.green ('Example app is running at ', log.color.boldGreen, 'http://localhost:1333') } })
