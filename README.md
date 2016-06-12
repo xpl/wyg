@@ -78,7 +78,7 @@ Both functions can be extended to introduce new behavior. This is how you do tha
 
 ### Extending `parseMedia`
 
-Tag a method with **$parseMedia** to designate it as URL parser. For asynchronous parsing, you can return Promise:
+Tag a method with **$parseMedia** to designate it as an URL parser. For asynchronous parsing, you can return Promise:
 
 ```javascript
 images: $parseMedia (function (url) {
