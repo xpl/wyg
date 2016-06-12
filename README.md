@@ -132,7 +132,7 @@ parseMedia: function (url) {
                                 return _.extend (media, { originalUrl: url }) }) },
 ```
 
-### Extending renderMedia
+### Extending `renderMedia`
 
 This is done much the same way as with the former one:
 
