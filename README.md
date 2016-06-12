@@ -48,8 +48,6 @@ Everything is built upon a JS library called [Useless.js](https://github.com/xpl
 
 ## Adding support of new media types
 
-### Media lifecycle
-
 All incoming URLs that are pasted from clipboard go through `parseMedia` facility. This function converts URLs to abstract media definitions in JSON format. Those definitions, when serialized, can be easily stored/interpreted by external applications (e.g. template engines, when rendering to static HTML at server side).
 
 Example:
