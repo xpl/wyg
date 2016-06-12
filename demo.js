@@ -19,10 +19,13 @@ App = $singleton (Component, {
             this.file ('./') } },
 
     $depends: [
+        
         require ('useless/server/supervisor'),
+        require ('useless/server/deploy'),
         require ('useless/server/http'),
-        require ('useless/server/uploads') ],
+        require ('useless/server/uploads'),
+        require ('useless/server/devtools') ],
 
-    init: function (then) {
-        then ()
-        log.green ('Example app is running at ', log.color.boldGreen, 'http://localhost:1333') } })
+
+    init: function () {
+            log.green ('Example app is running at ', log.color.boldGreen, 'http://localhost:1333') } })

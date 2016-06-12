@@ -34,7 +34,6 @@
         <script src="/src/contenteditable/exec_command.js"></script>
         <script src="/src/contenteditable/keyboard_input.js"></script>
         <script src="/src/contenteditable/markup_normalization.js"></script>
-        <script src="/src/contenteditable/pasting_media.js"></script>
         <script src="/src/contenteditable/undo_redo.js"></script>
         <script src="/src/contenteditable/undo_redo_detection.js"></script>
 
@@ -43,6 +42,9 @@
         <script src="/src/dd_container/hit_testing.js"></script>
         <script src="/src/dd_container/item_placeholder.js"></script>
         <script src="/src/dd_container/item_positioning.js"></script>
+
+        <script src="/src/media_io.js"></script>
+        <script src="/src/pasting_media.js"></script>
 
         <script src="/src/dd_container_adapter.js"></script>
         <script src="/src/firefox_layout_adapter.js"></script>
@@ -73,7 +75,10 @@
                     ContentEditable_UndoRedo,
                     ContentEditable_MarkupNormalization,
                     ContentEditable_KeyboardInput,
-                    ContentEditable_PastingMedia,
+                    
+
+                    Wyg_MediaIO,
+                    Wyg_PastingMedia,
                     
                     Wyg_ContentAPI,
                     Wyg_DDContainerAdapter,
@@ -176,8 +181,10 @@
 
                         /*  Tests progress
                          */
-                        testStarted:  function (t)       { whereToPutEditor.append (t.el = Node.pre.append ('Running test: ' + t.name + '… ')) },
-                        testComplete: function (t, then) {                          t.el.append (t.failed ? 'FAIL' : 'OK'); _.delay (then) } },
+                        testStarted:  function (t) { whereToPutEditor.append (t.el = Node.pre.append ('Running test: ' + t.name + '… ')); return __.delay (0) },
+                        testComplete: function (t) { t.el.append (t.failed ? 'FAIL' : 'OK'); return __.delay (0) } })
+
+                    .then (
 
                         /*  After tests done
                          */

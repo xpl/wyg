@@ -1,0 +1,11 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "script"
+  },
+  "loadEagerly": [
+    "node_modules/useless/base/*",
+    "node_modules/useless/client/*",
+    "node_modules/useless/server/*"
+  ]
+}
