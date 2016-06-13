@@ -48,9 +48,13 @@ Wyg_MediaIO = $trait ({
 /*  ------------------------------------------------------------------------ */
 
     renderMedia: function (media) {
-                    return this.initDragForItem (this[media.type] (media).extend ({
-                                                                            wygMediaData: media,
-                                                                            ddData: { originalSize: Vec2.wh (media.originalSize) }}))[0] },
+
+                    var n = this[media.type] (media)
+
+                        n.wygMediaData = media
+                        n.ddData       = { originalSize: Vec2.wh (media.originalSize) }
+
+                    return this.initDragForItem (n)[0] },
 
     $renderMedia: {
 

@@ -102,56 +102,60 @@ DDContainer_DraggingItems = $trait ({
                         if (sourceRow[0] !== target.row[0]) {
                             this.rowLayout (sourceRow, cfg) } } },
 
-    initDragForItem: function (item) { var prevHit     = undefined,
-                                           isLeftmost  = false,
-                                           isRightmost = false,
-                                           item        = $(item)
+    initDragForItem: function (item) { item = $(item)
 
-                        return item.addClass ('dd-item').drag ({
+                        if (!item[0].ddEnabled) {
+                             item[0].ddEnabled = true
 
-                            relativeTo: this.el,
+                            var prevHit     = undefined,
+                                isLeftmost  = false,
+                                isRightmost = false
 
-                            start: this.$ (function (where, e) { item.addClass ('drag'); this.isDragging = true;
+                            return item.addClass ('dd-item').drag ({
 
-                                                prevHit = this.hitTest (where)
+                                relativeTo: this.el,
 
-                                                isLeftmost  = item.is (':first-child')
-                                                isRightmost = item.is (':last-child')
+                                start: this.$ (function (where, e) { item.addClass ('drag'); this.isDragging = true;
 
-                                                /*  Set transform origin to where we picked it (to scale around cursor)
-                                                 */
-                                                item.css ('transform-origin',
-                                                    ((e.offsetX / item.width ())  * 100.0) + '% ' +
-                                                    ((e.offsetY / item.height ()) * 100.0) + '%') }),
+                                                    prevHit = this.hitTest (where)
 
-                            move: this.$ (function (memo, offset, where, e) { var hit = this.hitTest (where)
+                                                    isLeftmost  = item.is (':first-child')
+                                                    isRightmost = item.is (':last-child')
 
-                                                if (!hit.equals (prevHit)) {
-                                                    this.dragItemTo (item, hit)
-                                                    prevHit = hit }
+                                                    /*  Set transform origin to where we picked it (to scale around cursor)
+                                                     */
+                                                    item.css ('transform-origin',
+                                                        ((e.offsetX / item.width ())  * 100.0) + '% ' +
+                                                        ((e.offsetY / item.height ()) * 100.0) + '%') }),
 
-                                                /*  Stick item to cursor
-                                                 */
-                                                item.css (item.ddData ().pos.add (offset).asLeftTop) }),
+                                move: this.$ (function (memo, offset, where, e) { var hit = this.hitTest (where)
 
-                            end: this.$ (function () { this.isDragging = false
+                                                    if (!hit.equals (prevHit)) {
+                                                        this.dragItemTo (item, hit)
+                                                        prevHit = hit }
 
-                                                _.delay (function () { item.removeClass ('drag') });
+                                                    /*  Stick item to cursor
+                                                     */
+                                                    item.css (item.ddData ().pos.add (offset).asLeftTop) }),
 
-                                                if (item.hasClass ('removing')) {
-                                                    item[0].animateWithAttribute ('disappear').timeout (1000).then (function () {
-                                                        item.removeClass ('removing')
-                                                        if (item.parent ().hasClass ('removing')) {
-                                                            item.parent ().removeClass ('removing').detach () }
-                                                        else {
-                                                            item.detach () } }) }
-                                                else {
-                                                    this.replacePlaceholderWith (item) }
+                                end: this.$ (function () { this.isDragging = false
 
-                                                this.rowPlaceholder.ddData ({ originalSize: this.restPlaceholderSize })
+                                                    _.delay (function () { item.removeClass ('drag') });
 
-                                                this.layout.postpone ()
-                                                this.contentChanged.postpone () }) }) }
+                                                    if (item.hasClass ('removing')) {
+                                                        item[0].animateWithAttribute ('disappear').timeout (1000).then (function () {
+                                                            item.removeClass ('removing')
+                                                            if (item.parent ().hasClass ('removing')) {
+                                                                item.parent ().removeClass ('removing').detach () }
+                                                            else {
+                                                                item.detach () } }) }
+                                                    else {
+                                                        this.replacePlaceholderWith (item) }
+
+                                                    this.rowPlaceholder.ddData ({ originalSize: this.restPlaceholderSize })
+
+                                                    this.layout.postpone ()
+                                                    this.contentChanged.postpone () }) }) } }
 
 })
 
