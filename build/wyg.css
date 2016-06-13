@@ -107,7 +107,7 @@
 
 .dd-container .dd-item { display: block; box-sizing: border-box; }
 
-.dd-container:not([noanimate]) .dd-item:not(.drag):not(.appear)
+.dd-container:not([noanimate]) .dd-item:not(.drag):not(.appear),
 .dd-container:not([noanimate]) > * {
 
     -webkit-transition:
