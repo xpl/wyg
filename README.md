@@ -23,12 +23,17 @@ Watch demo on YouTube: [youtube.com/watch?v=u1wNfSHwSQA](https://www.youtube.com
 
 In it's current state the stuff is quite unusable. Things to be done:
 
-- [ ] Get rid of jQuery (moving to the [`Node+`](https://github.com/xpl/useless/blob/master/client/node%2B.js) library)
 - [ ] Safari compatibility (some tests fail).
 - [ ] MS Edge compatibility.
 - [ ] Implement hyperlink editing in the floating markup panel.
 - [ ] Fix nonworking plus button (should trigger file open dialog).
 - [ ] Add build script.
+
+Minor (but important) tasks:
+
+- [ ] Get rid of jQuery (moving to the [`Node+`](https://github.com/xpl/useless/blob/master/client/node%2B.js) library)
+- [ ] Make use of [`$depends`](https://github.com/xpl/useless/wiki/$trait#dependency-resolving-for-component-traits) mechanism for traits.
+
 
 ## Running demo
 
