@@ -16,6 +16,7 @@ First public beta (still many bugs to fix). Docs are pending.
 - Custom undo/redo manager (works with arbitrary DOM changes)
 - Intercepts native undo/redo commands (not limited to hotkeys)
 - [Test-driven](https://www.youtube.com/watch?v=IWLE8omFnQw)
+- Pluggable/extendable architecture based on [traits](https://github.com/xpl/useless/wiki/$trait).
 
 Watch demo on YouTube: [youtube.com/watch?v=u1wNfSHwSQA](https://www.youtube.com/watch?v=u1wNfSHwSQA)
 
