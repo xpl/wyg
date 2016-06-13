@@ -39,7 +39,7 @@ You will need `node` and `npm`.
 3. Run `node demo.js`
 4. Open `localhost:1333` in Chrome (Safari / Firefox / Edge support is coming)
 
-### Updating demo
+## Updating demo
 
 Instead of `git pull`, use `./update.sh` (runs `git pull && npm update`). This is needed because it's dependencies change rapidly and you need to update all shit together to maintain consistency.
 
@@ -75,7 +75,7 @@ this.renderMedia (def) // produces DOM element from that definition
 
 Both functions can be extended to introduce new behavior. This is how you do that.
 
-### Extending `parseMedia`
+### 1. Extending `parseMedia`
 
 Tag a method with **$parseMedia** to designate it as an URL parser. For asynchronous parsing, you can return Promise:
 
@@ -133,7 +133,7 @@ parseMedia: function (url) {
                                 return _.extend (media, { originalUrl: url }) }) },
 ```
 
-### Extending `renderMedia`
+### 2. Extending `renderMedia`
 
 This is done much the same way as with the former one:
 
