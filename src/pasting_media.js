@@ -4,6 +4,75 @@ Wyg_PastingMedia = $trait ({
 
 /*  ------------------------------------------------------------------------ */
 
+    $test: function () {
+
+    /*  Example component                                                    */
+
+        var Wyg = $component ({
+
+            $traits: [  Testosterone.LogsMethodCalls,
+                        DOMReference,
+                        DOMTotalRecall,
+                        DOMEvents,
+
+                        DDContainer_ItemPositioning,
+                        DDContainer_ItemPlaceholder,
+                        DDContainer_HitTesting,
+                        DDContainer_DraggingItems,
+                        DDContainer_DroppingFiles,
+
+                        ContentEditable_ExecCommand,
+                        ContentEditable_UndoRedoDetection,
+                        ContentEditable_UndoRedo,
+                        ContentEditable_MarkupNormalization,
+                        ContentEditable_KeyboardInput,
+
+                        Wyg_MediaIO,
+                        Wyg_PastingMedia,
+                        Wyg_EmptyState,
+                        Wyg_ContentAPI],
+
+            makeAddIcon:  function () { return Node.span },
+            makeWaitIcon: function () { return Node.span },
+            uploadFile:   _.notImplemented,
+
+            test: $parseMedia (function (url) {
+                                    if (url === 'http://test/') {
+                                        return {
+                                            type: 'dummy',
+                                            dummyData: 'hello' } } }),
+
+            dummy: $renderMedia (function (data) {
+                                    return Node.make ('dummy')
+                                               .attr ({ data: data.dummyData }) }),
+
+            init: function () {
+                    this.domReady (Node.div .toggleAttribute ('contenteditable', true)
+                                            .appendTo (document.body)) } })
+
+        $assert (Wyg.supportedMedia.contains ('test'))
+
+        var wyg = new Wyg ()
+            
+            wyg.processPaste ({
+                preventDefault: _.noop,
+                clipboardData: {
+                    types: ['text/plain'],
+                    items: [{
+                        getAsString: _.cps.constant ('http://test/') }] } })
+
+        return __.delay (1)
+                 .then (function () {
+                            $assert (wyg.dom.innerHTML,
+                                '<p empty="true"><br></p>' +
+                                '<p class="dd-row" contenteditable="false">' +
+                                    '<dummy data="hello" class="dd-item" appear="true"></dummy>' +
+                                '</p>')
+                            wyg.destroy () })
+    },
+
+/*  ------------------------------------------------------------------------ */
+
     $defaults: {
         allowedTags: {
             a: { href: true,
@@ -17,7 +86,7 @@ Wyg_PastingMedia = $trait ({
                                         e.preventDefault () 
                                         e.clipboardData.items[0].getAsString (this.$ (function (txt) {
                                             var parsedURL  = this.parseURL (txt)
-                                            if (parsedURL) { this.embedURL (parsedURL) }
+                                            if (parsedURL) { this.embedURL (parsedURL.href) }
                                                       else { this.insertText (txt) } })) } }),
 
 /*  ------------------------------------------------------------------------ */
@@ -29,7 +98,7 @@ Wyg_PastingMedia = $trait ({
                     parser.href = txt
                 if (parser.hostname) { return parser } } },
 
-    embedURL: function (url) {
+    embedURL: $log (function (url) {
         var range = Range.current
         if (range &&
            !range.collapsed &&
@@ -38,7 +107,7 @@ Wyg_PastingMedia = $trait ({
         else {
             var escaped = _.escape (url)
             this.insertHTML ('<a pasted="true" href="' + escaped + '">' + escaped + '</a>')
-            this.cleanupEmptyParagraphLeftAfterVideoIsInserted () } },
+            this.cleanupEmptyParagraphLeftAfterVideoIsInserted () } }),
 
 /*  ------------------------------------------------------------------------ */
 
@@ -50,22 +119,42 @@ Wyg_PastingMedia = $trait ({
 
 /*  ------------------------------------------------------------------------ */
 
-    mediafyLink: function (a) {
-                           a.busyUntil (this.parseMedia (a.href)
+    mediafyLink: $log (function (a) {
+                           a.busyUntil (this.parseMedia (a.href))
                                  .then (this.$ (function (media) {
                                                 this.replaceLink (a,
-                                                    this.renderMedia (media)) }))).panic },
+                                                    this.renderMedia (media)) }))
+                                 .catch (function (e) {
+                                            if (e !== null) { // null means not found
+                                                throw e } })
+                                 .panic }),
 
 /*  ------------------------------------------------------------------------ */
 
-    replaceLink: $customCommand (function (a, x) {
+    replaceLink: $customCommand ($log (function (a, x) {
+
                                     var p = Node.paragraph
                                         p.className = 'dd-row'
                                         p.setAttribute ('contenteditable', 'false')
                                         x.animateWithAttribute ('appear')
                                         p.appendChild (x)
                                         p.insertMeBefore (this.dom.splitSubtreeBefore (a))
-                                        a.removeFromParent () }),
+                                        a.removeFromParent ()
+
+                                    /*  Manually call this to restore prompt paragraph if needed.
+
+                                        When inserting links into empty editor it leaves no empty
+                                        paragraph left immediately after the procedure. And before
+                                        the markup normalization occurs (which normally restores
+                                        the prompt paragraph) the undo/redo detection algorithm needs
+                                        to insert its so-called "trap" somewhere (see undo_redo_detection.js for details).
+
+                                        Probably we should somehow generalize the prompt paragraph
+                                        restoring, so it will be guaranteed that at the emitUndoTrap
+                                        stage we always have that prompt paragraph set up.            */
+
+                                        if (this.cleanupParagraphs) {
+                                            this.cleanupParagraphs () } })),
 
 /*  Fixes nasty glitch, happens for unknown reason...
     This is simple workaround ---------------------------------------------- */

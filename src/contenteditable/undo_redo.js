@@ -81,6 +81,7 @@ ContentEditable_UndoRedo = $trait ({
                                     ContentEditable_UndoRedo,
                                     ContentEditable_MarkupNormalization,
                                     ContentEditable_KeyboardInput,
+                                    Wyg_EmptyState,
                                     Wyg_ContentAPI],
 
                         init: function () {

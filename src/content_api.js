@@ -9,11 +9,7 @@ Wyg_ContentAPI = $trait ({
     /*  Bind to this to get notified on content modifications
      */
     contentReseted: $trigger (),
-    contentChanged: $trigger ($on ('input', function () { this.updateEmptyStatus () })),
-
-    isEmpty: $observableProperty (true, function (value) {
-                                            this.domReady (function (dom) {
-                                                                     dom.toggleAttribute ('data-empty', value) }) }),
+    contentChanged: $trigger ($on ('input', function () {})),
 
 
     /*  This is used for testing/debugging purposes, to set/extract legit content use 'value' property
@@ -86,15 +82,6 @@ Wyg_ContentAPI = $trait ({
                                 return _.filter (this.dom.childNodes, function (n) {
                                     return n.isParagraph &&
                                           !n.isDDPlaceholder }) }),
-
-    nonemptyParagraphs: $property (function () {
-        return _.reject (this.paragraphs, _.property ('isEmptyParagraph')) }),
-
-    updateEmptyStatus: function () {
-                            this.isEmpty = _.reduce2 (true, this.paragraphs, function (allEmpty, p) {
-                                                                                    var isEmpty = !p.isDDRow && p.isEmptyParagraph
-                                                                                        p.toggleAttribute ('data-empty', isEmpty)
-                                                                                        return allEmpty && isEmpty }) },
 
 
 /*  Creates a context within whose all animations are supressed.

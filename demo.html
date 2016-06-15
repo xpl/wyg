@@ -5,7 +5,7 @@
             h1 { font-weight: normal; letter-spacing: -0.04em; font-size: 40px; }
             main { margin: 0 auto; max-width: 700px; min-width: 100px; }
             #put-editor-here > pre { font-size: 11px; margin: 0; padding: 0; }
-            .wyg:focus p[data-empty]:last-child:before { content: 'You can drag images and paste media links (YouTube, images).'; }
+            .wyg:focus p[empty]:last-child:before { content: 'You can drag images and paste media links (YouTube, images).'; }
         </style>
 
         <!-- Wyg CSS -->
@@ -16,7 +16,7 @@
         <script src="/node_modules/jquery/dist/jquery.js"></script>
 
         <!-- Useless.js library -->
-        <script src="/node_modules/useless/build/useless.micro.min.js"></script>
+        <script src="/node_modules/useless/build/useless.micro.js"></script>
 
         <!-- Useless.js Devtools Library for unit tests and exception handling -->
         <script src="/node_modules/useless/build/useless.devtools.js"></script>
@@ -49,6 +49,7 @@
         <script src="/src/dd_container_adapter.js"></script>
         <script src="/src/firefox_layout_adapter.js"></script>
         <script src="/src/floating_markup_panel.js"></script>
+        <script src="/src/empty_state.js"></script>
         <script src="/src/content_api.js"></script>
 
         <script>
@@ -76,10 +77,10 @@
                     ContentEditable_MarkupNormalization,
                     ContentEditable_KeyboardInput,
                     
-
                     Wyg_MediaIO,
                     Wyg_PastingMedia,
-                    
+
+                    Wyg_EmptyState,
                     Wyg_ContentAPI,
                     Wyg_DDContainerAdapter,
                     Wyg_FirefoxLayoutAdapter,

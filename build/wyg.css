@@ -154,9 +154,9 @@
 
 .wyg:not([noanimate]) { transition: height 0.25s ease-in-out; }
 
-.wyg[data-empty]:not(.dragging-file):not(:focus) { overflow: hidden; height: 40px !important; }
-.wyg[data-empty]:not(.dragging-file)             .dd-item.placeholder { transform: scale(1); transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out; }
-.wyg[data-empty]:not(.dragging-file):not(:focus) .dd-item.placeholder { transform: scale(0); opacity: 0; }
+.wyg[empty]:not(.dragging-file):not(:focus) { overflow: hidden; height: 40px !important; }
+.wyg[empty]:not(.dragging-file)             .dd-item.placeholder { transform: scale(1); transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out; }
+.wyg[empty]:not(.dragging-file):not(:focus) .dd-item.placeholder { transform: scale(0); opacity: 0; }
 
 .wyg irony { color: red; font-style: italic; }
 .wyg .dd-item { cursor: move; }
@@ -168,10 +168,10 @@
 
 .wyg[static-layout] p { position: static; }
 
-.wyg       p[data-empty]:first-child:before,
-.wyg       p[data-empty]:last-child:before { content: 'Tell us something...'; opacity: 0.25; position: absolute; user-select: none; pointer-events: none; }
-.wyg:focus p[data-empty]:first-child:before,
-.wyg:focus p[data-empty]:last-child:before { content: 'You can drag images and paste media links.'; opacity: 0.25; position: absolute; user-select: none; pointer-events: none; }
+.wyg       p[empty]:first-child:before,
+.wyg       p[empty]:last-child:before { content: 'Tell us something...'; opacity: 0.25; position: absolute; user-select: none; pointer-events: none; }
+.wyg:focus p[empty]:first-child:before,
+.wyg:focus p[empty]:last-child:before { content: 'You can drag images and paste media links.'; opacity: 0.25; position: absolute; user-select: none; pointer-events: none; }
 
 .wyg { border: 1px solid #e9e9e9; border-top-color: #ccc; padding: 10px 10px; }
 .wyg:focus { outline: none; }

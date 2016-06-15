@@ -9,7 +9,7 @@ Wyg_MediaIO = $trait ({
 
 /*  ------------------------------------------------------------------------ */
 
-    parseMedia: function (url) {
+    parseMedia: $log (function (url) {
 
                 /*  Gather values from all methods tagged with $parseMedia   */
 
@@ -19,7 +19,7 @@ Wyg_MediaIO = $trait ({
                 
                     return Promise.firstResolved (values)
                                   .then (function (media) {
-                                            return _.extend (media, { originalUrl: url }) }) },
+                                            return _.extend (media, { originalUrl: url }) }) }),
 
     $parseMedia: {
 
@@ -33,7 +33,7 @@ Wyg_MediaIO = $trait ({
 
         youtube: function (url) {
                     var match = url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/)
-                    var id = match && (match[7].length == 11) && match[7]
+                    var id = match && (match[7].length === 11) && match[7]
                     if (id) {
                         return {
                             type: 'iframe',
@@ -47,14 +47,14 @@ Wyg_MediaIO = $trait ({
 
 /*  ------------------------------------------------------------------------ */
 
-    renderMedia: function (media) {
+    renderMedia: $log (function (media) {
 
                     var n = this[media.type] (media)
 
                         n.wygMediaData = media
                         n.ddData       = { originalSize: Vec2.wh (media.originalSize) }
 
-                    return this.initDragForItem (n)[0] },
+                    return this.initDragForItem (n)[0] }),
 
     $renderMedia: {
 
