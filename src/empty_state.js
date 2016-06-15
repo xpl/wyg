@@ -8,7 +8,7 @@ Wyg_EmptyState = $trait ({
                                                                      dom.toggleAttribute ('empty', value) }) }),
 
     nonemptyParagraphs: $property (function () {
-        							return _.reject (this.paragraphs, _.property ('isEmptyParagraph')) }),
+                                    return _.reject (this.paragraphs, _.property ('isEmptyParagraph')) }),
 
     updateEmptyState: function () {
                             this.isEmpty = _.reduce2 (true, this.paragraphs, function (allEmpty, p) {
