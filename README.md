@@ -53,6 +53,31 @@ Instead of `git pull`, use `./update.sh` (runs `git pull && npm update`). This i
 
 Everything is built upon a JS library called [Useless.js](https://github.com/xpl/useless) (working title). It delivers composable [traits](https://github.com/xpl/useless/wiki/%24trait) support to JavaScript and a powerful unit test system. You may read more about it in the [project's wiki](https://github.com/xpl/useless/wiki). DOM operations are based on the [Node+](https://github.com/xpl/useless/blob/master/client/node%2B.js) library (coming with Useless).
 
+## Implementing file uploads
+
+See the reference implementation at [file_uploading.js](https://github.com/xpl/wyg/blob/master/src/file_uploading.js) trait. You need to implement the `uploadFile` method. With a _Promise_, it should return elements instantiated by the `renderMedia` factory:
+
+```javascript
+    uploadFile: function (file, then) {
+                    return JSONAPI.uploadFile (this.uploadPath, file).then (this.$ (function (response) {
+                        return this.renderMedia ({ type: 'img',
+                                                    src: '/' + this.uploadPath + '/' + response.id + '.jpg',
+                                           originalSize: { width: response.w,
+                                                          height: response.h } }) })).panic },
+```
+
+## Changing default icons
+
+Override these methods (default icons are hard-coded as SVG HTML):
+
+```javascript
+    makeWaitIcon: function () {
+                    return Node.div.extend ({ className: 'wyg-icon', innerHTML: '...' }) },
+
+    makeAddIcon: function () {
+                    return Node.div.extend ({ className: 'wyg-icon', innerHTML: '...' }) },
+```
+
 ## Adding support of new media types
 
 All incoming URLs that are pasted from clipboard go through `parseMedia` facility. This function converts URLs to abstract media definitions in JSON format. Those definitions, when serialized, can be easily stored/interpreted by external applications (e.g. template engines, when rendering to static HTML at server side).
