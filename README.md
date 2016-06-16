@@ -55,7 +55,9 @@ Everything is built upon a JS library called [Useless.js](https://github.com/xpl
 
 ## Implementing the file uploading
 
-See the reference implementation at the [`file_uploading.js`](https://github.com/xpl/wyg/blob/master/src/file_uploading.js) trait. You need to implement the `uploadFile` method. With a _Promise_, it should return elements instantiated by the `renderMedia` factory:
+See the reference implementation at the [`file_uploading.js`](https://github.com/xpl/wyg/blob/master/src/file_uploading.js) trait. You will need to implement the `uploadFile` method.
+
+With a _Promise_, it should return elements instantiated by the `renderMedia` factory:
 
 ```javascript
 uploadFile: function (file, then) {
@@ -66,17 +68,7 @@ uploadFile: function (file, then) {
                                                       height: response.h } }) })).panic },
 ```
 
-## Changing default icons
-
-Override these methods (default icons are hard-coded as SVG HTML):
-
-```javascript
-    makeWaitIcon: function () {
-                    return Node.div.extend ({ className: 'wyg-icon', innerHTML: '...' }) },
-
-    makeAddIcon: function () {
-                    return Node.div.extend ({ className: 'wyg-icon', innerHTML: '...' }) },
-```
+See instructions below on how to extend the `renderMedia` method behavior.
 
 ## Adding support of new media types
 
@@ -182,3 +174,15 @@ iframe: $renderMedia (function (media) {
 ```
 
 Those methods are dispatched by looking into the `type` property in media definitions.
+
+## Changing default icons
+
+Override these methods (default icons are hard-coded as SVG HTML):
+
+```javascript
+makeWaitIcon: function () {
+                return Node.div.extend ({ className: 'wyg-icon', innerHTML: '...' }) },
+
+makeAddIcon: function () {
+                return Node.div.extend ({ className: 'wyg-icon', innerHTML: '...' }) },
+```
