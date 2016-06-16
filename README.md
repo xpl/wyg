@@ -58,12 +58,12 @@ Everything is built upon a JS library called [Useless.js](https://github.com/xpl
 See the reference implementation at the [`file_uploading.js`](https://github.com/xpl/wyg/blob/master/src/file_uploading.js) trait. You need to implement the `uploadFile` method. With a _Promise_, it should return elements instantiated by the `renderMedia` factory:
 
 ```javascript
-    uploadFile: function (file, then) {
-                    return JSONAPI.uploadFile (this.uploadPath, file).then (this.$ (function (response) {
-                        return this.renderMedia ({ type: 'img',
-                                                    src: '/' + this.uploadPath + '/' + response.id + '.jpg',
-                                           originalSize: { width: response.w,
-                                                          height: response.h } }) })).panic },
+uploadFile: function (file, then) {
+                return JSONAPI.uploadFile ('/uploads', file).then (this.$ (function (response) {
+                    return this.renderMedia ({ type: 'img',
+                                                src: '/uploads/' + response.file + '.jpg',
+                                       originalSize: { width: response.w,
+                                                      height: response.h } }) })).panic },
 ```
 
 ## Changing default icons
