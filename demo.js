@@ -13,7 +13,7 @@ App = $singleton (Component, {
             this.file ('./demo.html'),
 
         'api/upload': {
-            post: this.uploadImageTo.$ ('./uploads') },
+            post: this.uploadImageTo.$ ('./upload') },
 
         ':file':
             this.file ('./') } },
@@ -26,7 +26,9 @@ App = $singleton (Component, {
         require ('useless/server/uploads'),
         require ('useless/server/devtools') ],
 
+    shouldRestartOnSourceChange: function (action, file, yes, no) {
+                                    if (file.contains (__dirname + '/upload')) no () },
 
     init: function () {
-            require ('useless/server/base/fs').mkdir ('uploads')
+            require ('useless/server/base/fs').mkdir ('upload')
             log.green ('Example app is running at ', log.color.boldGreen, 'http://localhost:1333') } })

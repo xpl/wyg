@@ -51,6 +51,7 @@
         <script src="/src/floating_markup_panel.js"></script>
         <script src="/src/empty_state.js"></script>
         <script src="/src/content_api.js"></script>
+        <script src="/src/file_uploading.js"></script>
 
         <script>
             LogOverlay.init ()
@@ -84,7 +85,8 @@
                     Wyg_ContentAPI,
                     Wyg_DDContainerAdapter,
                     Wyg_FirefoxLayoutAdapter,
-                    Wyg_FloatingMarkupPanel
+                    Wyg_FloatingMarkupPanel,
+                    Wyg_FileUploading
                 ],
 
 
@@ -116,30 +118,7 @@
                     this.domReady ((this.dom || Node.div).attr ({
                                                               class: 'wyg',
                                                     contenteditable:  true,
-                                                         spellcheck:  false })) },
-
-            /*  Demo implementation of some app-specific APIs, as Wyg itself doesn't know how
-                to upload files and how to display icons: */
-
-                makeAddIcon: function () {
-                    return _.extend (Node.div, {
-                                        className: 'wyg-icon',
-                                        innerHTML: '<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  width="216px" height="146px" viewBox="0 0 216 146" enable-background="new 0 0 216 146" xml:space="preserve"><path d="M162.18,41.592c-5.595-9.586-13.185-17.176-22.771-22.771c-9.588-5.595-20.055-8.392-31.408-8.392 c-11.352,0-21.822,2.797-31.408,8.392c-9.587,5.594-17.177,13.184-22.772,22.771C48.225,51.179,45.428,61.649,45.428,73 c0,11.352,2.798,21.82,8.392,31.408c5.595,9.585,13.185,17.176,22.772,22.771c9.587,5.595,20.056,8.392,31.408,8.392 c11.352,0,21.822-2.797,31.408-8.392c9.586-5.594,17.176-13.185,22.771-22.771c5.594-9.587,8.391-20.057,8.391-31.408 C170.57,61.648,167.773,51.178,162.18,41.592z M144.5,78.214c0,1.412-0.516,2.636-1.549,3.667c-1.032,1.031-2.254,1.548-3.666,1.548 h-20.857v20.856c0,1.412-0.517,2.635-1.548,3.667c-1.032,1.032-2.254,1.548-3.666,1.548h-10.429c-1.412,0-2.634-0.516-3.666-1.548 c-1.032-1.032-1.548-2.255-1.548-3.667V83.429H76.714c-1.412,0-2.634-0.517-3.666-1.548c-1.032-1.031-1.548-2.255-1.548-3.667 V67.785c0-1.412,0.516-2.634,1.548-3.666c1.032-1.032,2.254-1.548,3.666-1.548h20.858V41.714c0-1.412,0.516-2.634,1.548-3.666 c1.032-1.032,2.254-1.548,3.666-1.548h10.429c1.412,0,2.635,0.516,3.666,1.548c1.031,1.032,1.549,2.254,1.549,3.666v20.857h20.856 c1.412,0,2.634,0.516,3.666,1.548c1.032,1.032,1.548,2.254,1.548,3.666V78.214z"/></svg>' }) },
-
-                makeWaitIcon: function () {
-                    return _.extend (Node.div, {
-                                        className: 'wyg-icon',
-                                        innerHTML: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"> <path d="M15.05,11.888c-0.268-0.055-0.535,0.118-0.59,0.39c-0.426,2.082-2.281,3.594-4.41,3.594c-2.481,0-4.5-2.019-4.5-4.5 c0-2.649,1.851-4.5,4.5-4.5c0.554,0,1.383,0.002,2.051,0.005L9.361,8.975c-0.22,0.168-0.261,0.481-0.093,0.7 c0.098,0.129,0.247,0.196,0.396,0.196c0.106,0,0.214-0.033,0.304-0.104l3.78-2.896c0.123-0.095,0.197-0.242,0.195-0.398 c0-0.156-0.074-0.304-0.199-0.397l-3.78-2.847c-0.219-0.164-0.532-0.123-0.7,0.099c-0.166,0.221-0.122,0.534,0.099,0.7l2.454,1.848 c-0.609-0.002-1.29-0.004-1.768-0.004c-3.187,0-5.5,2.313-5.5,5.5c0,3.032,2.468,5.5,5.5,5.5c2.602,0,4.869-1.848,5.391-4.393 C15.495,12.208,15.321,11.943,15.05,11.888z"/></svg>' }) },
-
-                uploadImage: function (file, then) {
-                    return JSONAPI.uploadFile ('upload', file).then (function (response) {
-                        return Image.fetch ('/uploads/' + response.id + '.jpg') }).panic },
-
-            /*  $on gets it auto unbinded upon destroy (feature of DOMEvents trait)  */
-            
-                preventsPageReloadWhenDroppingFile: $on ({ what: 'drop', target: document },
-                                                        function (e) {
-                                                            e.preventDefault () }),
+                                                         spellcheck:  false })) }
             })
         </script>
 

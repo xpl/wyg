@@ -33,10 +33,6 @@ Wyg_PastingMedia = $trait ({
                         Wyg_ContentAPI,
                         Wyg_DDContainerAdapter],
 
-            makeAddIcon:  function () { return Node.span },
-            makeWaitIcon: function () { return Node.span },
-            uploadFile:   _.notImplemented,
-
         /*  $parseMedia and $renderMedia for custom media types */
 
             test: $parseMedia (function (url) {

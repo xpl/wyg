@@ -104,8 +104,11 @@ DDContainer_DraggingItems = $trait ({
 
     initDragForItem: function (item) { item = $(item)
 
-                        if (!item[0].ddEnabled) {
-                             item[0].ddEnabled = true
+                        if (item[0].ddEnabled) {
+                            return item } // short-circuit
+
+                        else {
+                            item[0].ddEnabled = true
 
                             var prevHit     = undefined,
                                 isLeftmost  = false,

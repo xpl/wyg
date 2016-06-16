@@ -29,13 +29,6 @@ Wyg_DDContainerAdapter = $trait ({
                                                                             margin: this.paragraphMargin } } }))
                             this.layout () }) },
 
-    uploadFile: function (file) {
-        return this.uploadImage (file).then (function (img) {
-                                                return $('<img>')
-                                                            .css ({ width: 0, height: 0 })
-                                                            .attr ({ 'src': img.src })
-                                                            .ddData ({ src: img.src, originalSize: Vec2.xy (img.width, img.height) }) }) },
-
     makeRowPlaceholder: function () {
         return $('<p contenteditable="false" class="dd-row placeholder" no-history>') },
         
