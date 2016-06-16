@@ -53,7 +53,7 @@ Instead of `git pull`, use `./update.sh` (runs `git pull && npm update`). This i
 
 Everything is built upon a JS library called [Useless.js](https://github.com/xpl/useless) (working title). It delivers composable [traits](https://github.com/xpl/useless/wiki/%24trait) support to JavaScript and a powerful unit test system. You may read more about it in the [project's wiki](https://github.com/xpl/useless/wiki). DOM operations are based on the [Node+](https://github.com/xpl/useless/blob/master/client/node%2B.js) library (coming with Useless).
 
-## Implementing file uploads
+## Implementing the file uploading
 
 See the reference implementation at the [`file_uploading.js`](https://github.com/xpl/wyg/blob/master/src/file_uploading.js) trait. You need to implement the `uploadFile` method. With a _Promise_, it should return elements instantiated by the `renderMedia` factory:
 
