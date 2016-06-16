@@ -52,7 +52,7 @@ Wyg_MediaIO = $trait ({
                     var n = this[media.type] (media)
 
                         n.wygMediaData = media
-                        n.ddData       = { originalSize: Vec2.wh (media.originalSize) }
+                        n.ddData       = { originalSize: Vec2.fromWH (media.originalSize) }
 
                     return this.initDragForItem (n)[0] }),
 

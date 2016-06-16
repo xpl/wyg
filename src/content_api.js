@@ -9,7 +9,7 @@ Wyg_ContentAPI = $trait ({
     /*  Bind to this to get notified on content modifications
      */
     contentReseted: $trigger (),
-    contentChanged: $trigger ($on ('input', function () {})),
+    contentChanged: $trigger ($on ('input', function () { })),
 
 
     /*  This is used for testing/debugging purposes, to set/extract legit content use 'value' property
@@ -43,6 +43,7 @@ Wyg_ContentAPI = $trait ({
 
     mediaNodeValue: function (n) {
         return _.nonempty (_.extended (n.wygMediaData, {
+                                            originalSize: n.ddData.originalSize.asWidthHeight,
                                             relativeSize: { width: n.ddData.size.w / n.parentNode.ddData.innerSize.w,
                                                             height: 1.0 / n.ddData.originalSize.aspect } })) },
 

@@ -30,17 +30,21 @@ Wyg_PastingMedia = $trait ({
                         Wyg_MediaIO,
                         Wyg_PastingMedia,
                         Wyg_EmptyState,
-                        Wyg_ContentAPI],
+                        Wyg_ContentAPI,
+                        Wyg_DDContainerAdapter],
 
             makeAddIcon:  function () { return Node.span },
             makeWaitIcon: function () { return Node.span },
             uploadFile:   _.notImplemented,
 
+        /*  $parseMedia and $renderMedia for custom media types */
+
             test: $parseMedia (function (url) {
                                     if (url === 'http://test/') {
                                         return {
                                             type: 'dummy',
-                                            dummyData: 'hello' } } }),
+                                            dummyData: 'hello',
+                                            originalSize: Vec2.xy (800, 600) } } }),
 
             dummy: $renderMedia (function (data) {
                                     return Node.make ('dummy')
@@ -52,6 +56,8 @@ Wyg_PastingMedia = $trait ({
 
         $assert (Wyg.supportedMedia.contains ('test'))
 
+    /*  Simulate paste   */
+
         var wyg = new Wyg ()
             
             wyg.processPaste ({
@@ -61,13 +67,24 @@ Wyg_PastingMedia = $trait ({
                     items: [{
                         getAsString: _.cps.constant ('http://test/') }] } })
 
+    /*  Check results   */
+
         return __.delay (1)
                  .then (function () {
-                            $assert (wyg.dom.innerHTML,
-                                '<p empty="true"><br></p>' +
-                                '<p class="dd-row" contenteditable="false">' +
-                                    '<dummy data="hello" class="dd-item" appear="true"></dummy>' +
-                                '</p>')
+
+                            $assert (wyg.value, [{  type: 'media',
+                                                    media: [{
+                                                        type: 'dummy',
+                                                        dummyData: 'hello',
+                                                        originalSize: { width: 800, height: 600 },
+                                                        originalUrl: "http://test/",
+                                                        relativeSize: { width: 1, height: 0.75 } } ] } ])
+
+                            $assert (wyg.dom.innerHTML, '<p empty="true"><br></p>' +
+                                                        '<p class="dd-row" contenteditable="false">' +
+                                                            '<dummy data="hello" class="dd-item" appear="true"></dummy>' +
+                                                        '</p>')
+
                             wyg.destroy () })
     },
 
