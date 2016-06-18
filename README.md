@@ -19,7 +19,7 @@ First public beta (still many bugs to fix). Docs are pending.
 - Pluggable/extendable architecture based on [traits](https://github.com/xpl/useless/wiki/$trait)
 - [Test-driven](https://www.youtube.com/watch?v=IWLE8omFnQw)
 
-Watch demo on YouTube: [youtube.com/watch?v=u1wNfSHwSQA](https://www.youtube.com/watch?v=u1wNfSHwSQA)
+👉 [**Watch demo on YouTube**](https://www.youtube.com/watch?v=u1wNfSHwSQA)
 
 ![pic](http://wtf.jpg.wtf/95/01/1466218207-950125b46071cd2188453264d5d8b231.png)
 
