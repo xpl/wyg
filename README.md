@@ -21,6 +21,8 @@ First public beta (still many bugs to fix). Docs are pending.
 
 Watch demo on YouTube: [youtube.com/watch?v=u1wNfSHwSQA](https://www.youtube.com/watch?v=u1wNfSHwSQA)
 
+![pic](http://wtf.jpg.wtf/95/01/1466218207-950125b46071cd2188453264d5d8b231.png)
+
 ## TODO
 
 In it's current state the stuff is quite unusable. Things to be done:
@@ -97,7 +99,7 @@ Here's how you can describe an element which height is encoded as a percentage o
 <media-row>
   <media-item style="width: 50%;">
       <spacer style="padding-top: 24.7%;"></spacer>
-      <content style="background-image:url(some-image.jpg);background-size:cover;"></content>
+      <content style="background-image:url(some-image.jpg);"></content>
   </media-item>
   ...
 </media-row>
