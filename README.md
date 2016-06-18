@@ -60,7 +60,7 @@ Editor's state is exposed via the `value` property:
 ```javascript
 wyg.value = [
     { type: 'p', html: 'this is <b>text paragraph</b>, containing arbitrary HTML' },
-    { type: 'media",
+    { type: 'media',
       media: [
           { type: 'img',
             src:  'http://example/some-image.jpg',
