@@ -100,7 +100,7 @@ When reading `value`, some additional metadata is returned on media elements:
   }
 ```
 
-**Relative size** encodes the calculated size of a media item, relative to page width. It is done this way so you can generate adaptive markup, which is abstract from absolute metrics and screen sizes.
+**Relative size** encodes the calculated size of a media item, relative to page width. It is abstract from absolute metrics and screen sizes, so a responsive layout could be generated from that schema.
 
 Here's how you can describe an element which height is encoded as a percentage of its width, with pure CSS:
 
