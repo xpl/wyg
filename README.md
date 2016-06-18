@@ -70,23 +70,24 @@ Editor's state is exposed via the `value` property:
 ```javascript
 wyg.value = [
     { type: 'p', html: 'this is <b>text paragraph</b>, containing arbitrary HTML' },
-    { type: 'media',
+    { type: 'media', // media row
       media: [
-          { type: 'img',
+          { type: 'img', // media element
             src:  'http://example/some-image.jpg',
             originalSize: { width: 1280, height: 720 } },
           
-          { type: 'iframe',
+          { type: 'iframe', // media element
             src:  '...'
             originalSize: ... }
       ]
-    }
+    },
+    ...
   ]
 ```
 
 ## Interpreting `value`
 
-When reading `value`, some additional metadata is returned on media blocks:
+When reading `value`, some additional metadata is returned on media elements:
 
 ```javascript
   { type: 'img',
