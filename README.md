@@ -39,10 +39,6 @@ Minor (but important) tasks:
 - [ ] Get rid of jQuery (moving to the [`Node+`](https://github.com/xpl/useless/blob/master/client/node%2B.js) library)
 - [ ] Make use of [`$depends`](https://github.com/xpl/useless/wiki/$trait#dependency-resolving-for-component-traits) mechanism for traits.
 
-## Recent news
-
-- Fixed bug that prevented from
-
 ## Running demo
 
 You will need `node` and `npm`.
