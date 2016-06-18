@@ -13,6 +13,7 @@ First public beta (still many bugs to fix). Docs are pending.
 - Arranges media nicely in columns
 - Fluid layout with animations
 - Floating markup panel with custom tags support
+- Serializes to/from JSON
 - Custom undo/redo manager (works with arbitrary DOM changes)
 - Intercepts native undo/redo commands (not limited to hotkeys)
 - Pluggable/extendable architecture based on [traits](https://github.com/xpl/useless/wiki/$trait)
@@ -35,7 +36,6 @@ Minor (but important) tasks:
 - [ ] Get rid of jQuery (moving to the [`Node+`](https://github.com/xpl/useless/blob/master/client/node%2B.js) library)
 - [ ] Make use of [`$depends`](https://github.com/xpl/useless/wiki/$trait#dependency-resolving-for-component-traits) mechanism for traits.
 
-
 ## Running demo
 
 You will need `node` and `npm`.
@@ -52,6 +52,61 @@ Instead of `git pull`, use `./update.sh` (runs `git pull && npm update`). This i
 ## Under the hood
 
 Everything is built upon a JS library called [Useless.js](https://github.com/xpl/useless) (working title). It delivers composable [traits](https://github.com/xpl/useless/wiki/%24trait) support to JavaScript and a powerful unit test system. You may read more about it in the [project's wiki](https://github.com/xpl/useless/wiki). DOM operations are based on the [Node+](https://github.com/xpl/useless/blob/master/client/node%2B.js) library (coming with Useless).
+
+## Setting `value`
+
+Editor's state is exposed via the `value` property:
+
+```javascript
+wyg.value = [
+    { type: 'p', html: 'this is <b>text paragraph</b>, containing arbitrary HTML' },
+    { type: 'media",
+      media: [
+          { type: 'img',
+            src:  'http://example/some-image.jpg',
+            originalSize: { width: 1280, height: 720 } },
+          
+          { type: 'iframe',
+            src:  '...'
+            originalSize: ... }
+      ]
+    }
+  ]
+```
+
+## Interpreting `value`
+
+When reading `value`, some additional metadata is returned on media blocks:
+
+```javascript
+  { type: 'img',
+    src:  '...'
+    originalSize: ...
+    relativeSize: { width: 0.5, height: 0.247 } } // here
+```
+
+**Relative size** encodes the calculated size of a media item, relative to the page width. So you don't need to repeat the layout calculations (done by [`dd_container/item_positioning.js`](https://github.com/xpl/wyg/blob/master/src/dd_container/item_positioning.js)) when implementing server-side rendering.
+
+Here's how you can implement an element which height is encoded as the proportion of it's width, with pure CSS:
+
+```html
+<media-row>
+  <media-item style="width: 50%;">
+      <spacer style="padding-top: 12.3%;"></spacer>
+      <content style="background-image:url(some-image.jpg);background-size:cover;"></content>
+  </media-item>
+  ...
+</media-row>
+```
+
+```css
+media-row          { display: block; white-space: nowrap; overflow: hidden; }
+media-item         { display: inline-block; position: relative; overflow: hidden; }
+media-item spacer  { display: block; background-size: cover; }
+media-item content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+```
+
+It works because padding percentages are relative to element's width, even with `padding-top`. So a height can be encoded via an additional `spacer` element put inside.
 
 ## Implementing the file uploading
 
@@ -177,12 +232,19 @@ Those methods are dispatched by looking into the `type` property in media defini
 
 ## Changing default icons
 
-Override these methods (default icons are hard-coded as SVG HTML):
+Default icons are hard-coded as SVG HTML, and you can change them them by overriding these methods:
 
 ```javascript
 makeWaitIcon: function () {
-                return Node.div.extend ({ className: 'wyg-icon', innerHTML: '...' }) },
+                return Node.div.extend ({ className: 'wyg-icon', innerHTML: '<svg>...' }) },
 
 makeAddIcon: function () {
-                return Node.div.extend ({ className: 'wyg-icon', innerHTML: '...' }) },
+                return Node.div.extend ({ className: 'wyg-icon', innerHTML: '<svg>...' }) },
+```
+
+Expected return value is a DOM node. For example, returning an FontAwesome icon (some CSS tweaks may be required):
+
+```javascript
+make: function () {
+        return Node.div.cls ('wyg-icon fa fa-plus-square') },
 ```
