@@ -25,7 +25,7 @@ First public beta (still many bugs to fix). Docs are pending.
 
 ## Recent news
 
-- Added [doc entry](https://github.com/xpl/wyg#interpreting-value) on how to interpret the `value` property.
+- Added doc entry on how to [set](https://github.com/xpl/wyg#setting-value) and [interpret](https://github.com/xpl/wyg#interpreting-value) the `value` property.
 - Refactored the [file uploading API](https://github.com/xpl/wyg#implementing-the-file-uploading).
 - Fixed crash when media links get pasted into empty editor.
 - Implemented [pluggable URL parsers and media types](https://github.com/xpl/wyg#1-extending-parsemedia) facility.
