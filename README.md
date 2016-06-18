@@ -35,8 +35,13 @@ In it's current state the stuff is quite unusable. Things to be done:
 
 Minor (but important) tasks:
 
+- [ ] Implement ability to insert text paragraphs at arbitrary location around media rows.
 - [ ] Get rid of jQuery (moving to the [`Node+`](https://github.com/xpl/useless/blob/master/client/node%2B.js) library)
 - [ ] Make use of [`$depends`](https://github.com/xpl/useless/wiki/$trait#dependency-resolving-for-component-traits) mechanism for traits.
+
+## Recent news
+
+- Fixed bug that prevented from
 
 ## Running demo
 
