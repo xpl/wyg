@@ -85,9 +85,9 @@ When reading `value`, some additional metadata is returned on media blocks:
     relativeSize: { width: 0.5, height: 0.247 } } // here
 ```
 
-**Relative size** encodes the calculated size of a media item, relative to the page width. So you don't need to repeat the layout calculations (done by [`dd_container/item_positioning.js`](https://github.com/xpl/wyg/blob/master/src/dd_container/item_positioning.js)) when implementing server-side rendering.
+**Relative size** encodes the calculated size of a media item, relative to the page width. So you don't need to repeat the layout calculations (done by [`dd_container/item_positioning.js`](https://github.com/xpl/wyg/blob/master/src/dd_container/item_positioning.js)) when implementing the server-side rendering.
 
-Here's how you can implement an element which height is encoded as the proportion of it's width, with pure CSS:
+Here's how you can describe an element which height is encoded as a percentage of its width, with pure CSS:
 
 ```html
 <media-row>
