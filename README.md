@@ -96,7 +96,7 @@ Here's how you can describe an element which height is encoded as a percentage o
 ```html
 <media-row>
   <media-item style="width: 50%;">
-      <spacer style="padding-top: 12.3%;"></spacer>
+      <spacer style="padding-top: 24.7%;"></spacer>
       <content style="background-image:url(some-image.jpg);background-size:cover;"></content>
   </media-item>
   ...
