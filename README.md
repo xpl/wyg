@@ -110,7 +110,7 @@ media-item spacer  { display: block; background-size: cover; }
 media-item content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 ```
 
-It works because padding percentages are relative to element's width, even with `padding-top`. So a height can be encoded via an additional `spacer` element put inside.
+It works because padding percentages are relative to element's _width_, even with `padding-top`. So a height can be encoded via an additional `spacer` element put inside.
 
 ## Implementing the file uploading
 
