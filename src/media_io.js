@@ -59,11 +59,11 @@ Wyg_MediaIO = $trait ({
     $renderMedia: {
 
         img: function (media) {
-                return Node.img.attr ({ src: media.src, width: media.originalSize.width, height: media.originalSize.height }) },
+                return N.img.attr ({ src: media.src, width: media.originalSize.width, height: media.originalSize.height }) },
 
         iframe: function (media) {
-                    return Node.div.append (
-                           Node.iframe.attr ({ src: media.src, frameborder: 0, allowfullscreen: true })) } },
+                    return N.div.append (
+                           N.iframe.attr ({ src: media.src, frameborder: 0, allowfullscreen: true })) } },
 
 
 })

@@ -232,15 +232,15 @@ This is done much the same way as with the former one:
 
 ```javascript
 img: $renderMedia (function (media) {
-        return Node.img.attr ({ src: media.src,
-                              width: media.originalSize.width,
-                             height: media.originalSize.height }) }),
+        return N.img.attr ({ src: media.src,
+                           width: media.originalSize.width,
+                          height: media.originalSize.height }) }),
 ```
 
 ```javascript
 iframe: $renderMedia (function (media) {
-            return Node.div.append (
-                   Node.iframe.attr ({ src: media.src, frameborder: 0, allowfullscreen: true })) } }),
+            return N.div.add (
+                   N.iframe.attr ({ src: media.src, frameborder: 0, allowfullscreen: true })) } }),
 ```
 
 Those methods are dispatched by looking into the `type` property in media definitions.
@@ -251,15 +251,15 @@ Default icons are hard-coded as SVG HTML, and you can change them them by overri
 
 ```javascript
 makeWaitIcon: function () {
-                return Node.div.extend ({ className: 'wyg-icon', innerHTML: '<svg>...' }) },
+                return N.div.extend ({ className: 'wyg-icon', innerHTML: '<svg>...' }) },
 
 makeAddIcon: function () {
-                return Node.div.extend ({ className: 'wyg-icon', innerHTML: '<svg>...' }) },
+                return N.div.extend ({ className: 'wyg-icon', innerHTML: '<svg>...' }) },
 ```
 
 Expected return value is a DOM node. For example, returning an FontAwesome icon (some CSS tweaks may be required):
 
 ```javascript
 make: function () {
-        return Node.div.cls ('wyg-icon fa fa-plus-square') },
+        return N.div.cls ('wyg-icon fa fa-plus-square') },
 ```

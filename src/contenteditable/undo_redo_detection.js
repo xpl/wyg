@@ -36,7 +36,7 @@ ContentEditable_UndoRedoDetection = $trait ({
          */
         'assure that consequent execCommand do not collapse upon undo': function (done) {
 
-            var node =  Node.div
+            var node =  N.div
                             .toggleAttributes ({ contenteditable: true })
                             .append ('---')
                             .appendTo (document.body)
@@ -72,9 +72,9 @@ ContentEditable_UndoRedoDetection = $trait ({
                 simulateRedo: function () { this.execCommand ('redo') },
 
                 init: function () {
-                    this.domReady (Node.div .toggleAttribute ('contenteditable', true)
-                                            .append (Node.paragraph.append ('and motorcycle.'))
-                                            .appendTo (document.body)) } })
+                    this.domReady (N.div.toggleAttribute ('contenteditable', true)
+                                        .append (N.p.append ('and motorcycle.'))
+                                        .appendTo (document.body)) } })
 
             /*  Generate some content via execCommand API (to make native history non empty)
              */

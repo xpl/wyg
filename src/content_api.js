@@ -50,12 +50,11 @@ Wyg_ContentAPI = $trait ({
     renderValueBlock: function (block) {
                             switch (block.type) {
                                 case 'p':
-                                    return _.extend (Node.paragraph, { innerHTML: block.html })
+                                    return N.p.html (block.html)
                                 case 'media':
-                                    return Node.paragraph
-                                                .cls ('dd-row')
-                                                .attr ({ contenteditable: false })
-                                                .append (_.map (block.media, this.renderMedia)) } },
+                                    return N.p.cls ('dd-row')
+                                              .attr ({ contenteditable: false })
+                                              .append (_.map (block.media, this.renderMedia)) } },
 
     /*  Use this for resetting content with custom fill actions
      */

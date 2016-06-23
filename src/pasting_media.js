@@ -43,12 +43,11 @@ Wyg_PastingMedia = $trait ({
                                             originalSize: Vec2.xy (800, 600) } } }),
 
             dummy: $renderMedia (function (data) {
-                                    return Node.make ('dummy')
-                                               .attr ({ data: data.dummyData }) }),
+                                    return N ('dummy').attr ({ data: data.dummyData }) }),
 
             init: function () {
-                    this.domReady (Node.div .toggleAttribute ('contenteditable', true)
-                                            .appendTo (document.body)) } })
+                    this.domReady (N.div.toggleAttribute ('contenteditable', true)
+                                        .appendTo (document.body)) } })
 
         $assert (Wyg.supportedMedia.contains ('test'))
 
@@ -146,7 +145,7 @@ Wyg_PastingMedia = $trait ({
 
     replaceLink: $customCommand ($log (function (a, x) {
 
-                                    var p = Node.paragraph
+                                    var p = N.p
                                         p.className = 'dd-row'
                                         p.setAttribute ('contenteditable', 'false')
                                         x.animateWithAttribute ('appear')

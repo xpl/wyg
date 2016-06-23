@@ -115,7 +115,7 @@
             /*  Entry point  */
 
                 init: function () {
-                    this.domReady ((this.dom || Node.div).attr ({
+                    this.domReady ((this.dom || N.div).attr ({
                                                               class: 'wyg',
                                                     contenteditable:  true,
                                                          spellcheck:  false })) }
@@ -153,7 +153,7 @@
 
                         /*  Tests progress
                          */
-                        testStarted:  function (t) { whereToPutEditor.append (t.el = Node.pre.append ('Running test: ' + t.name + '… ')); return __.delay (0) },
+                        testStarted:  function (t) { whereToPutEditor.append (t.el = N.pre.append ('Running test: ' + t.name + '… ')); return __.delay (0) },
                         testComplete: function (t) { t.el.append (t.failed ? 'FAIL' : 'OK'); return __.delay (0) } })
 
                     .then (

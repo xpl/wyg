@@ -35,7 +35,7 @@ Wyg_FloatingMarkupPanel = $trait ({
 
                 /*  <outer>111<span>222</span>333</outer>
                  */
-                var span = range.wrapIn (Node.span)
+                var span = range.wrapIn (N.span)
 
                 /*  Save range
                  */
@@ -61,7 +61,7 @@ Wyg_FloatingMarkupPanel = $trait ({
             /*  Toggle case
              */
             else {
-                range.wrapIn (Node.make (tagName)) } } }),
+                range.wrapIn (N (tagName)) } } }),
 
 
     /*  Supresses panel interaction while selecting text
@@ -130,7 +130,7 @@ Wyg_FloatingMarkupPanel = $trait ({
                 Wyg_FloatingMarkupPanel],
 
             init: function () {
-                    this.domReady (Node.make ('div').appendTo (document.body)) } }))
+                    this.domReady (N.div.appendTo (document.body)) } }))
 
 
         /*  Test tag toggle

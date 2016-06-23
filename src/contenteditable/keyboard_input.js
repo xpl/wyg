@@ -68,7 +68,7 @@ ContentEditable_KeyboardInput = $trait ({
                if (prev &&
                    prev.isParagraph &&
                   !prev.forbidsEditing) { CaretPosition.survives (this.dom, function () {
-                                                prev.appendChildren ([Node.linebreak].concat (
+                                                prev.appendChildren ([N.br].concat (
                                                                         next.removeFromParent ()
                                                                             .childNodesArray))  }) } }),
 
@@ -78,9 +78,10 @@ ContentEditable_KeyboardInput = $trait ({
 
         /*  Emulates layout conditions (Safari behaves differently when absolute positioning is on)
          */
-        document.head.appendChild (Node.make ('style').append (
-            '.wyg-keyboard-input-test-instance   { position: relative; }\n' +
-            '.wyg-keyboard-input-test-instance p { position: absolute; }'))
+        document.head.add (
+                    N.style.add (
+                        '.wyg-keyboard-input-test-instance   { position: relative; }\n' +
+                        '.wyg-keyboard-input-test-instance p { position: absolute; }'))
 
         var Compo = undefined
         var withTestHTML = function (html, doWith) {
@@ -102,11 +103,11 @@ ContentEditable_KeyboardInput = $trait ({
                         'br'    : { i: true }, // for marking caret position
                         'em'    : {} } },
 
-                init: function () { this.dom = _.extend (Node.div
-                                                             .toggleAttribute ('contenteditable', true)
-                                                             .insertMeAfter (document.body.lastChild), {
-                                                                className: 'wyg-keyboard-input-test-instance',
-                                                                innerHTML: this.html })
+                init: function () { this.dom = N.div.toggleAttribute ('contenteditable', true)
+                                                    .insertMeAfter (document.body.lastChild)
+                                                    .extend ({
+                                                        className: 'wyg-keyboard-input-test-instance',
+                                                        innerHTML: this.html })
 
                                     if (window.wygTestInstanceCreated) {
                                         window.wygTestInstanceCreated (this) }

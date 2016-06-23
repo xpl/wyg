@@ -1,9 +1,9 @@
 /*  Helpers
     ======================================================================== */
 
-$mixin (Node, {
-    excessLinebreak: $static ($property (function () {
-        return _.extend (Node.linebreak, { isExcessLinebreak: true }) })) })
+$mixin (N, {
+    excessBr: $static ($property (function () {
+                                    return N.br.extend ({ isExcessLinebreak: true }) })) })
 
 /*  
     If it looks as paragraph on screen, it should be <p>
@@ -43,10 +43,9 @@ ContentEditable_MarkupNormalization = $trait ({
 
                 init: function () {
                        
-                        this.dom = _.extend (
-                            Node.div
-                                .toggleAttribute ('contenteditable', true)
-                                .insertMeAfter (document.body.lastChild), { innerHTML: this.html })
+                        this.dom = N.div.toggleAttribute ('contenteditable', true)
+                                        .insertMeAfter (document.body.lastChild)
+                                        .html (this.html)
 
                         if (window.wygTestInstanceCreated) {
                             window.wygTestInstanceCreated (this) }
@@ -163,8 +162,8 @@ ContentEditable_MarkupNormalization = $trait ({
                          */
                         if (node.isDiv) { var p = this.outermostParagraphForNode (node)
 
-                            Node.excessLinebreak.insertMeBefore (node.outerLeftBoundaryIn  (p))
-                            Node.excessLinebreak.insertMeAfter  (node.outerRightBoundaryIn (p)) }
+                            N.excessBr.insertMeBefore (node.outerLeftBoundaryIn  (p))
+                            N.excessBr.insertMeAfter  (node.outerRightBoundaryIn (p)) }
 
                         /*  <br> uplifting
                          */
@@ -194,9 +193,8 @@ ContentEditable_MarkupNormalization = $trait ({
                                                                                n.forbidsEditing }
         _.each (_.partition2 (this.dom.childNodes, shouldNotWrap), function (group) {
             if (!shouldNotWrap (group.first)) {
-                Node.paragraph
-                    .insertMeBefore (group.first)
-                    .appendChildren (group) } }) },
+                N.p.insertMeBefore (group.first)
+                   .appendChildren (group) } }) },
 
 
     /*  Splits <p> with <br><br>
@@ -263,9 +261,8 @@ ContentEditable_MarkupNormalization = $trait ({
                     return true } } })
 
         if (!textParagraphsLeft.length) {
-            Node.paragraph                       // create prompt paragraph
-                .appendChildren (Node.linebreak) // append <br>, this will be the cursor placeholder (WebKit does not like <p></p>)
-                .prependTo (this.dom) } } })
+            N.p.add (N.br) // append <br>, this will be the cursor placeholder (WebKit does not like <p></p>)
+               .prependTo (this.dom) } } })
 
 
 
