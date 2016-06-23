@@ -1,3 +1,11 @@
+/*  Node extensions
+    ======================================================================== */
+
+$mixin (Node, {
+
+    moveCaret: function (offset) { NormalizedCaretPosition.move (this, offset); return this } })
+
+
 /*  Working with spanning selections
 
     TODO: fix formatting issue causing Sublime to think that tab width is 2
