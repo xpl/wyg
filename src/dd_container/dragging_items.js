@@ -13,6 +13,10 @@ DDContainer_DraggingItems = $trait ({
                                                   this.domReady (function () {
                                                         this.el.toggleClass ('dragging', yes) }) }),
 
+/*  Override this to prevent dragging if needed  */
+
+    canDrag: function (item) { return true },
+
 
 /*  Private impl.
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -118,7 +122,15 @@ DDContainer_DraggingItems = $trait ({
 
                                 relativeTo: this.el,
 
-                                start: this.$ (function (where, e) { item.addClass ('drag'); this.isDragging = true;
+                                start: this.$ (function (where, e) {
+
+                                                    if (!this.canDrag (item[0])) {
+                                                        return false }
+
+                                                    item.addClass ('drag')
+                                                    this.isDragging = true;
+
+                                                    //log.ii (where, e.offsetX, e.offsetY)
 
                                                     prevHit = this.hitTest (where)
 
@@ -132,6 +144,8 @@ DDContainer_DraggingItems = $trait ({
                                                         ((e.offsetY / item.height ()) * 100.0) + '%') }),
 
                                 move: this.$ (function (memo, offset, where, e) { var hit = this.hitTest (where)
+
+                                                    //log.pp (offset, where)
 
                                                     if (!hit.equals (prevHit)) {
                                                         this.dragItemTo (item, hit)

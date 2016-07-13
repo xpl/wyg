@@ -45,12 +45,12 @@
     50%  { opacity: 0.25; }
     100% { opacity: 0.5; } }
 
-.dd-container-item-placement-zoom {
+[dd-container-item-placement-zoom] {
     z-index: 2;
     -webkit-animation: dd-container-item-placement-zoom 0.35s ease-in-out;
             animation: dd-container-item-placement-zoom 0.35s ease-in-out; }
 
-.dd-container-item-placement-mooz /* reverse */ {
+[dd-container-item-placement-mooz] /* reverse */ {
     -webkit-animation: dd-container-item-placement-mooz 0.35s ease-in-out;
             animation: dd-container-item-placement-mooz 0.35s ease-in-out;  }
 
@@ -72,7 +72,6 @@
 .dd-container .dd-item { background-size: cover; background-position: center center; background-repeat: no-repeat; }
 
 .dd-container .dd-item.removing { opacity: 0.2 !important; }
-.dd-container .dd-item.disappear,
 .dd-container .dd-item[disappear] {
             animation: bounce-zoom 0.25s ease-in-out;         animation-direction: reverse;
     -webkit-animation: bounce-zoom 0.25s ease-in-out; -webkit-animation-direction: reverse; }
@@ -107,7 +106,7 @@
 
 .dd-container .dd-item { display: block; box-sizing: border-box; }
 
-.dd-container:not([noanimate]) .dd-item:not(.drag):not(.appear),
+.dd-container:not([noanimate]) .dd-item:not(.drag):not([appear]),
 .dd-container:not([noanimate]) > * {
 
     -webkit-transition:
@@ -122,7 +121,7 @@
         width 0.2s ease-in-out,
         height 0.2s ease-in-out; }
 
-.dd-container .dd-item.appear {
+.dd-container .dd-item[appear] {
     -webkit-animation: bounce-zoom 0.25s ease-in-out;
             animation: bounce-zoom 0.25s ease-in-out; }
 

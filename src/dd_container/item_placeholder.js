@@ -72,10 +72,10 @@ DDContainer_ItemPlaceholder = $trait ({
                                         item.transform ({ scale: 1 })
                                             .css ('transform-origin', '50% 50%')
                                             .css (itemBBox.ltwh)
-                                            .animateWith ((sourceW > targetW) ?
-                                                        'dd-container-item-placement-mooz' :
-                                                            (sourceW < targetW) ?
-                                                                'dd-container-item-placement-zoom' : undefined) } }
+
+                                        item[0].animateWithAttribute (
+                                             (sourceW > targetW) ? 'dd-container-item-placement-mooz' :
+                                            ((sourceW < targetW) ? 'dd-container-item-placement-zoom' : undefined)) } }
 
                                 this.releasePlaceholder.postpone () },
 

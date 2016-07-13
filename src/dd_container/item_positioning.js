@@ -10,6 +10,8 @@ $mixin (Node, {
         isDDItem:        function () { return this.className.contains ('dd-item') },
         isDDPlaceholder: function () { return this.className.contains ('placeholder') },
 
+        setDDData: function (x) { this.ddData = x; return this },
+
         ddData: {
             get: function ()      { return (this.ddData_ || {}) },
             set: function (value) { return (this.ddData_ = _.extend (this.ddData, value)) } } } })

@@ -69,10 +69,10 @@ DDContainer_DroppingFiles = $trait ({
             this.uploadFile (file).done (this.$ (function (e, el) {
 
                 if (el) {
-                    this.initDragForItem (el)
-                            .animateWith ('appear')
+                    this.initDragForItem (el)[0]
+                            .animatedWithAttribute ('appear')
                             .removeAttr ('no-history')
-                            .insertBefore (target) }
+                            .insertMeBefore (target[0]) }
 
                 target.remove ()
 
@@ -82,10 +82,12 @@ DDContainer_DroppingFiles = $trait ({
             return target }) })
 
         this.replacePlaceholderWith (withFileUpload (file,
-            this.initDragForItem ($('<div class="upload-stub icon-holder" no-history>')
-                .ddData ({ originalSize: this.activePlaceholderSize })
-                .animateWith ('appear')
-                .append (this.makeWaitIcon ()))))
+            this.initDragForItem (
+                N.div.cls ('upload-stub icon-holder')
+                     .attr ({ 'no-history': true })
+                     .setDDData ({ originalSize: this.activePlaceholderSize })
+                     .animatedWithAttribute ('appear')
+                     .append (this.makeWaitIcon ()))))
 
         this.layout.postpone () } })
 
