@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/xpl/wyg#readme",
   "dependencies": {
-    "useless": ">= 0.0.101",
+    "useless": ">= 0.0.195",
     "underscore": ">= 1.8.3",
     "jquery": ">= 2.2.2"
   }
