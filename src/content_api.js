@@ -19,7 +19,8 @@ Wyg_ContentAPI = $trait ({
         set: function (v) { this.historyReady (function () {
                                 this.resetContent (function () { this.el.html (v) }) }) },
 
-        get: function () {  var copy = this.el.clone ().remove ('.dd-placeholder')
+        get: function () {  var copy = this.el.clone ()
+                                copy.find ('.placeholder').remove ()
                                 copy.find ('*[style]').removeAttr ('style')
                          return copy.html () } }),
 

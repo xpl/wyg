@@ -75,10 +75,10 @@ Wyg_PastingMedia = $trait ({
                                                         originalUrl: "http://test/",
                                                         relativeSize: { width: 1, height: 0.75 } } ] } ])
 
-                            $assert (wyg.dom.innerHTML, '<p empty="true"><br></p>' +
-                                                        '<p class="dd-row" contenteditable="false">' +
-                                                            '<dummy data="hello" class="dd-item" appear="true"></dummy>' +
-                                                        '</p>')
+                            $assert (wyg.html,  '<p empty="true"><br></p>' +
+                                                '<p class="dd-row" contenteditable="false">' +
+                                                    '<dummy data="hello" class="dd-item" appear="true"></dummy>' +
+                                                '</p>')
 
                             wyg.destroy () })
     },
