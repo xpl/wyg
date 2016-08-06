@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/xpl/wyg#readme",
   "dependencies": {
-    "useless": "^0.0.213"
+    "useless": ">=0.0.218"
   }
 }
