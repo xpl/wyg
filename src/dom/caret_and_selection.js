@@ -129,7 +129,7 @@ CaretPosition = $prototype ({
                                                range.collapsed && new CaretPosition (range.startContainer,
                                                                                      range.startOffset)) || undefined } })),
 
-    survives: $static ($log ('{{$proto}} {{_.stringify (this.current && this.current.normalized || "{ null }")}}',
+    survives: $static ($log ('{{$proto}} {{String.ify (this.current && this.current.normalized || "{ null }")}}',
 
                                          function ( domContext,
                                                     apocalypse) { var caret = NormalizedCaretPosition.current,

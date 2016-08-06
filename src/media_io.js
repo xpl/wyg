@@ -1,7 +1,7 @@
 /*  ------------------------------------------------------------------------ */
 
-_.defineTagKeyword ('parseMedia')
-_.defineTagKeyword ('renderMedia')
+Tags.define ('parseMedia')
+Tags.define ('renderMedia')
 
 /*  ------------------------------------------------------------------------ */
 
