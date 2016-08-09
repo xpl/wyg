@@ -86,7 +86,7 @@ DOMMutationDebugger = $component ({
 
                 _.each (this.frames[this.currentFrame++], function (state) { var vis = this.nodeVis (state.id)
 
-                    animated = animated || !(_.isEqual (foo = _.map (_.values (_.omit (state.css, 'background')), _.asString),
+                    animated = animated || !(_.isEqual (foo = _.map (_.values (_.omit (state.css, 'background')), String),
                                                         bar = _.map (_.keys (_.omit (state.css, 'background')), vis.css.arity1, vis)))
 
                     vis.css (state.css).text (state.text).removeClass ('dirty') }, this)
