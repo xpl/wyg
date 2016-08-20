@@ -3,7 +3,6 @@
 **ATTENTION: WORK IN PROGRESS. NOT MEANT TO BE USED BY ANYONE — STILL IN DEVELOPMENT PHASE, MANY BUGS TO FIX**
 
 A new WYSIWYG editing experience for the modern web.
-First public beta (still many bugs to fix). Docs are pending.
 
 - Built entirely from scratch
 - Works better than anything before
