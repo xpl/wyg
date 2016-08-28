@@ -37,9 +37,9 @@ DDContainer_ItemPositioning = $trait ({
 
     itemBBox: function (item) {
         return item.clientBBox ().offset (
-                    this.el.leftTop ().inverse.add (             // relative to this.el
-                        Vec2.xy (document.body.scrollLeft,
-                                 document.body.scrollTop))) },   // account scroll
+                    this.el.leftTop ().inverse.add (        // relative to this.el
+                        Vec2.xy (window.pageXOffset,
+                                 window.pageYOffset))) },   // account scroll
 
     contentBBox: $property (function () {
                                 var lastRow = this.rows.last ()

@@ -21,7 +21,6 @@ App = $singleton (Component, {
     $depends: [
         
         require ('useless/server/supervisor'),
-        require ('useless/server/deploy'),
         require ('useless/server/http'),
         require ('useless/server/uploads'),
         require ('useless/server/devtools') ],
