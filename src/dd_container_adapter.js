@@ -43,8 +43,15 @@ Wyg_DDContainerAdapter = $trait ({
     isDragging: function (yes) {
         if (yes) {
             this.execCustomCommand ('drag', function (done) {
-                this.isDraggingChange.when (false, function () {              //  close transaction when isDragging comes to false next time...
-                    this.layout.onceAfter (done.delayed (300)) }) }) } },     //  ..and after layout() is called
+                this.isDraggingChange.when (false, function () { //  close transaction when isDragging comes to false next time...
+                    _.delay (this.$ (function () {
+                        this.layout ()
+                        done ()
+                    }, 300))
+                })
+            })
+        }
+    },
 
 /*  Prevents dragging until a previous custom command context finalizes. */
 
