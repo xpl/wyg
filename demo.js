@@ -29,5 +29,5 @@ App = $singleton (Component, {
                                     if (file.contains (__dirname + '/upload')) no () },
 
     init: function () {
-            require ('useless/server/base/fs').mkdir ('upload')
+            require ('useless/server/base/fs').mkdir ('upload').catch (() => {})
             log.green ('Example app is running at ', log.color.boldGreen, 'http://localhost:1333') } })

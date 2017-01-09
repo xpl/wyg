@@ -44,6 +44,7 @@
         <script src="/src/empty_state.js"></script>
         <script src="/src/content_api.js"></script>
         <script src="/src/file_uploading.js"></script>
+        <script src="/src/align_hotkeys.js"></script>
 
         <script>
             DemoEditor = $component ({
@@ -76,7 +77,8 @@
                     Wyg_DDContainerAdapter,
                     Wyg_FirefoxLayoutAdapter,
                     Wyg_FloatingMarkupPanel,
-                    Wyg_FileUploading
+                    Wyg_FileUploading,
+                    Wyg_AlignHotkeys
                 ],
 
 
@@ -132,7 +134,7 @@
                         /*  Filter
                          */
                         //filter: function (t) { return t.proto === Wyg_DDContainerAdapter },
-                        //filter: function (t) { return t.suite === 'NodePlus' },
+                        filter: function (t) { return t.suite === 'NodePlus' },
 
                         /*  Options
                          */

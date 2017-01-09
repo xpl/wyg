@@ -152,6 +152,10 @@ ContentEditable_KeyboardInput = $trait ({
                                   '<p>foo<br>|bar</p>',   KeyCodes.Enter,
                                   '<p>foo</p><p>|bar</p>') },
 
+            'preserve paragraph attributes after split': function () {
+                $assertWygTyping ('<p align="right">foo<br>|bar</p>',   KeyCodes.Enter,
+                                  '<p align="right">foo</p><p align="right">|bar</p>') },
+
             'enter before br': function () {
                 $assertWygTyping ('<p>1111|<br>2222</p>', KeyCodes.Enter, '<p>1111</p><p>|2222</p>') },
 

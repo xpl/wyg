@@ -33,7 +33,7 @@ Wyg_ContentAPI = $trait ({
                 return this.nonemptyParagraphs.map (this.$ (function (p) {
                                                                 return p.isDDRow
                                                                             ? { type: 'media', media: p.childNodesArray.map (this.mediaNodeValue) }
-                                                                            : { type: 'p', html: p.innerHTML } })) },
+                                                                            : { type: 'p', align: p.getAttribute ('align') || 'left', html: p.innerHTML } })) },
 
         set: function (blocks) {
                 this.historyReady (function () {
@@ -51,7 +51,8 @@ Wyg_ContentAPI = $trait ({
     renderValueBlock: function (block) {
                             switch (block.type) {
                                 case 'p':
-                                    return N.p.html (block.html)
+                                    return N.p.attr ({ align: block.align || 'left' })
+                                              .html (block.html)
                                 case 'media':
                                     return N.p.cls ('dd-row')
                                               .attr ({ contenteditable: false })

@@ -104,7 +104,7 @@ ContentEditable_MarkupNormalization = $trait ({
 
     $defaults: {
         allowedTags: {
-            p:  { style: true },
+            p:  { style: true, align: true },
             br: {} } },
 
     normalizeMarkup: $customCommand (function () {
