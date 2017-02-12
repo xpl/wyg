@@ -12,12 +12,11 @@ Wyg_AlignHotkeys = $trait ({
 
         const p = this.currentParagraph
 
-        if (p) {
+        if (p && e.altKey) {
 
             const alignments = ['', 'center', 'right']
 
-            const direction = e.altKey && (e.key === 'ArrowRight') ? 1 :
-                                         ((e.key === 'ArrowLeft') ? -1 : 0)
+            const direction = ((e.key === 'ArrowRight') ? 1 : (e.key === 'ArrowLeft') ? -1 : 0)
 
             if (direction !== 0) {
                 
