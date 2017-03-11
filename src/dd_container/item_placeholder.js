@@ -11,7 +11,7 @@ DDContainer_ItemPlaceholder = $trait ({
     makeAddIcon: function () {
                     return N.div.extend ({
                                 className: 'wyg-icon',
-                                innerHTML: '<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  width="216px" height="146px" viewBox="0 0 216 146" enable-background="new 0 0 216 146" xml:space="preserve"><path d="M162.18,41.592c-5.595-9.586-13.185-17.176-22.771-22.771c-9.588-5.595-20.055-8.392-31.408-8.392 c-11.352,0-21.822,2.797-31.408,8.392c-9.587,5.594-17.177,13.184-22.772,22.771C48.225,51.179,45.428,61.649,45.428,73 c0,11.352,2.798,21.82,8.392,31.408c5.595,9.585,13.185,17.176,22.772,22.771c9.587,5.595,20.056,8.392,31.408,8.392 c11.352,0,21.822-2.797,31.408-8.392c9.586-5.594,17.176-13.185,22.771-22.771c5.594-9.587,8.391-20.057,8.391-31.408 C170.57,61.648,167.773,51.178,162.18,41.592z M144.5,78.214c0,1.412-0.516,2.636-1.549,3.667c-1.032,1.031-2.254,1.548-3.666,1.548 h-20.857v20.856c0,1.412-0.517,2.635-1.548,3.667c-1.032,1.032-2.254,1.548-3.666,1.548h-10.429c-1.412,0-2.634-0.516-3.666-1.548 c-1.032-1.032-1.548-2.255-1.548-3.667V83.429H76.714c-1.412,0-2.634-0.517-3.666-1.548c-1.032-1.031-1.548-2.255-1.548-3.667 V67.785c0-1.412,0.516-2.634,1.548-3.666c1.032-1.032,2.254-1.548,3.666-1.548h20.858V41.714c0-1.412,0.516-2.634,1.548-3.666 c1.032-1.032,2.254-1.548,3.666-1.548h10.429c1.412,0,2.635,0.516,3.666,1.548c1.031,1.032,1.549,2.254,1.549,3.666v20.857h20.856 c1.412,0,2.634,0.516,3.666,1.548c1.032,1.032,1.548,2.254,1.548,3.666V78.214z"/></svg>' }) },
+                                innerHTML: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  width="216px" height="146px" viewBox="0 0 216 146" enable-background="new 0 0 216 146" xml:space="preserve"><path d="M162.18,41.592c-5.595-9.586-13.185-17.176-22.771-22.771c-9.588-5.595-20.055-8.392-31.408-8.392 c-11.352,0-21.822,2.797-31.408,8.392c-9.587,5.594-17.177,13.184-22.772,22.771C48.225,51.179,45.428,61.649,45.428,73 c0,11.352,2.798,21.82,8.392,31.408c5.595,9.585,13.185,17.176,22.772,22.771c9.587,5.595,20.056,8.392,31.408,8.392 c11.352,0,21.822-2.797,31.408-8.392c9.586-5.594,17.176-13.185,22.771-22.771c5.594-9.587,8.391-20.057,8.391-31.408 C170.57,61.648,167.773,51.178,162.18,41.592z M144.5,78.214c0,1.412-0.516,2.636-1.549,3.667c-1.032,1.031-2.254,1.548-3.666,1.548 h-20.857v20.856c0,1.412-0.517,2.635-1.548,3.667c-1.032,1.032-2.254,1.548-3.666,1.548h-10.429c-1.412,0-2.634-0.516-3.666-1.548 c-1.032-1.032-1.548-2.255-1.548-3.667V83.429H76.714c-1.412,0-2.634-0.517-3.666-1.548c-1.032-1.031-1.548-2.255-1.548-3.667 V67.785c0-1.412,0.516-2.634,1.548-3.666c1.032-1.032,2.254-1.548,3.666-1.548h20.858V41.714c0-1.412,0.516-2.634,1.548-3.666 c1.032-1.032,2.254-1.548,3.666-1.548h10.429c1.412,0,2.635,0.516,3.666,1.548c1.031,1.032,1.549,2.254,1.549,3.666v20.857h20.856 c1.412,0,2.634,0.516,3.666,1.548c1.032,1.032,1.548,2.254,1.548,3.666V78.214z"/></svg>' }) },
 
     /*makeRowPlaceholder: function () {
         return $('<div class="dd-row placeholder">') },*/
@@ -21,10 +21,27 @@ DDContainer_ItemPlaceholder = $trait ({
                         this.itemPlaceholder.ddData ({ originalSize: Vec2.xy (this.width, this.restPlaceholderHeight) }) } },
 
     initPlaceholder: function () {
-                        $(this.dom).append (
-                            this.rowPlaceholder = this.makeRowPlaceholder ().append (
-                                this.itemPlaceholder = $('<div class="dd-item placeholder icon-holder" no-history>').append (
-                                    this.makeAddIcon ()))) },
+
+        $(this.dom).append (
+            this.rowPlaceholder = this.makeRowPlaceholder ().append (
+                this.itemPlaceholder = $('<div class="dd-item placeholder icon-holder" no-history>')
+                                            .append (this.makeAddIcon ())
+                                            .click (() => { this.fileInput.click () })))
+
+        this.fileInput = $('<input type="file" multiple="1" contenteditable="false" no-history no-layout>')
+                                .change (this.filesSelected)
+                                .appendTo (this.fileInputForm = $('<form style="display:none;" contenteditable="false" no-history no-layout>').appendTo (this.dom))
+    },
+
+    filesSelected () {
+
+        _.each (this.fileInput[0].files || [], file => {
+                                                    this.itemPlaceholder.addClass ('drag-accept')
+                                                    this.putFileToPlaceholder (file)
+                                                    this.releasePlaceholder () })
+
+        this.fileInputForm[0].reset ()
+    },
 
     releaseRowPlaceholder: function () {
 

@@ -26,6 +26,7 @@ A new WYSIWYG editing experience for the modern web.
 
 ## Recent news
 
+- Implemented "choose file" button behavior
 - Added doc entry on how to [set](https://github.com/xpl/wyg#setting-value) and [interpret](https://github.com/xpl/wyg#interpreting-value) the `value` property.
 - Refactored the [file uploading API](https://github.com/xpl/wyg#implementing-the-file-uploading).
 - Fixed crash when media links get pasted into empty editor.
@@ -38,7 +39,7 @@ In it's current state the stuff is quite unusable. Things to be done:
 - [ ] Safari compatibility (some tests fail).
 - [ ] MS Edge compatibility.
 - [ ] Implement hyperlink editing in the floating markup panel.
-- [ ] Fix nonworking plus button (should trigger file open dialog).
+- [x] Fix nonworking plus button (should trigger file open dialog).
 - [ ] Add build script.
 
 Minor (but important) tasks:

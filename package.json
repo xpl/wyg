@@ -6,6 +6,9 @@
     "type": "git",
     "url": "git+https://github.com/xpl/wyg.git"
   },
+  "scripts": {
+    "start": "node demo"
+  },
   "keywords": [
     "Wyg",
     "WYSIWYG",

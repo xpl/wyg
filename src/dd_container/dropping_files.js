@@ -89,8 +89,14 @@ DDContainer_DroppingFiles = $trait ({
                      .animatedWithAttribute ('appear')
                      .append (this.makeWaitIcon ()))))
 
-        this.layout.postpone () } })
+        this.layout.postpone ()
+    },
 
+    /*  Prevents page reload when user misses and drops a file to somewhere else in the document     */
+
+    cancelsDocumentDragover: $on ({ what: 'dragover', target: document }, function (e) { e.preventDefault () }),
+    cancelsDocumentDrop:     $on ({ what: 'drop',     target: document }, function (e) { e.preventDefault () }),
+})
 
 /*  ======================================================================== */
 

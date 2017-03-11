@@ -12,9 +12,5 @@ Wyg_FileUploading = $trait ({
                         return this.renderMedia ({ type: 'img',
                                                     src: '/' + this.uploadPath + '/' + response.id + '.jpg',
                                            originalSize: { width: response.w,
-                                                          height: response.h } }) })).panic },
-
-    preventsPageReloadWhenDroppingFile: $on ({ what: 'drop', target: document },
-                                            function (e) {
-                                                e.preventDefault () }),
+                                                          height: response.h } }) })).panic }
 })
