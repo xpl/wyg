@@ -5,7 +5,8 @@
 $mixin (Node, {
 
     $property: {
-        
+
+        isTextRow:       function () { return this.isParagraph && !this.isDDRow },     
         isDDRow:         function () { return this.className.contains ('dd-row') },
         isDDItem:        function () { return this.className.contains ('dd-item') },
         isDDPlaceholder: function () { return this.className.contains ('placeholder') },

@@ -21,6 +21,8 @@ Wyg_ContentAPI = $trait ({
 
         get: function () {  var copy = this.el.clone ()
                                 copy.find ('.placeholder').remove ()
+                                copy.find ('[no-history]').remove ()
+                                copy.find ('[no-layout]') .remove ()
                                 copy.find ('*[style]').removeAttr ('style')
                          return copy.html () } }),
 
@@ -30,10 +32,9 @@ Wyg_ContentAPI = $trait ({
     value: $property ({
 
         get: function () {
-                return this.nonemptyParagraphs.map (this.$ (function (p) {
-                                                                return p.isDDRow
-                                                                            ? { type: 'media', media: p.childNodesArray.map (this.mediaNodeValue) }
-                                                                            : { type: 'p', align: p.getAttribute ('align') || 'left', html: p.innerHTML } })) },
+                return this.nonemptyParagraphs.map (p => p.isDDRow
+                                                            ? { type: 'media', media: p.childNodesArray.map (this.mediaNodeValue) }
+                                                            : { type: 'p', align: p.getAttribute ('align') || 'left', html: p.innerHTML }) },
 
         set: function (blocks) {
                 this.historyReady (function () {
@@ -51,7 +52,7 @@ Wyg_ContentAPI = $trait ({
     renderValueBlock: function (block) {
                             switch (block.type) {
                                 case 'p':
-                                    return N.p.attr ({ align: block.align || 'left' })
+                                    return N.p.toggleAttribute ('align', (block.align !== 'left') && block.align)
                                               .html (block.html)
                                 case 'media':
                                     return N.p.cls ('dd-row')
@@ -83,7 +84,8 @@ Wyg_ContentAPI = $trait ({
     paragraphs: $property (function () {
                                 return _.filter (this.dom.childNodes, function (n) {
                                     return n.isParagraph &&
-                                          !n.isDDPlaceholder }) }),
+                                          !n.isDDPlaceholder &&
+                                          !n.hasClass ('removing') }) }),
 
 
 /*  Creates a context within whose all animations are supressed.
