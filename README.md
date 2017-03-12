@@ -26,6 +26,7 @@ A new WYSIWYG editing experience for the modern web.
 
 ## Recent news
 
+- Implemented ability to insert text before/after media blocks: **[see demo video](http://quick.as/z8gdum3wq)**
 - Implemented "choose file" button behavior
 - Added doc entry on how to [set](https://github.com/xpl/wyg#setting-value) and [interpret](https://github.com/xpl/wyg#interpreting-value) the `value` property.
 - Refactored the [file uploading API](https://github.com/xpl/wyg#implementing-the-file-uploading).
