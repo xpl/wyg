@@ -1,7 +1,7 @@
 /*  ------------------------------------------------------------------------ */
 
-Tags.define ('parseMedia')
-Tags.define ('renderMedia')
+Meta.globalTag ('parseMedia')
+Meta.globalTag ('renderMedia')
 
 /*  ------------------------------------------------------------------------ */
 

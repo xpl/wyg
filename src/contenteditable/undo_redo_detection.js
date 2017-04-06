@@ -72,6 +72,7 @@ ContentEditable_UndoRedoDetection = $trait ({
                 simulateRedo: function () { this.execCommand ('redo') },
 
                 init: function () {
+
                     this.domReady (N.div.toggleAttribute ('contenteditable', true)
                                         .append (N.p.append ('and motorcycle.'))
                                         .appendTo (document.body)) } })

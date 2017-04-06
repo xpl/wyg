@@ -31,7 +31,7 @@ ContentEditable_ExecCommand = $trait ({
         /*  TODO: add CPS support
          */
         customCommand: function (def, fn, name) {
-                            return Tags.modify (fn, function (fn) {
+                            return Meta.modify (fn, function (fn) {
                                 return $log ($boldBlue (function (/* ... */) { var callFn = fn.applies (this, arguments)
                                     return this.execCustomCommand (name, function (done) { callFn (); done () }) })) }) } },
 

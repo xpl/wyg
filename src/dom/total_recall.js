@@ -156,7 +156,7 @@ DOMTotalRecall = $trait ({
     $macroTags: { // TODO: add support for tagging methods in CPS notation.
 
         silent: function (def, fn, name) {
-                    return Tags.modify (fn, function (fn) {
+                    return Meta.modify (fn, function (fn) {
                         return function (/* arguments */) { return this.silent (name, fn.applies (this, arguments)) } }) } },
 
     silent: $log ($darkBlue (function (name, what) {
