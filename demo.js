@@ -10,13 +10,13 @@ App = $singleton (Component, {
     api: function () { return {
 
         '/':
-            this.file ('./demo.html'),
+            this.file.$ ('./demo.html'),
 
         'api/upload': {
             post: this.uploadImageTo.$ ('./upload') },
 
         ':file':
-            this.file ('./') } },
+            this.file.$ ('./') } },
 
     $depends: [
         
