@@ -106,73 +106,88 @@ DDContainer_DraggingItems = $trait ({
                         if (sourceRow[0] !== target.row[0]) {
                             this.rowLayout (sourceRow, cfg) } } },
 
-    initDragForItem: function (item) { item = $(item)
 
-                        if (item[0].ddEnabled) {
-                            return item } // short-circuit
+    initDragForItem (item) { item = $(item)
 
-                        else {
-                            item[0].ddEnabled = true
+        if (item[0].ddEnabled) {
+            return item } // short-circuit
 
-                            var prevHit     = undefined,
-                                isLeftmost  = false,
-                                isRightmost = false
+        else {
+            item[0].ddEnabled = true
 
-                            return item.addClass ('dd-item').drag ({
+            var prevHit     = undefined,
+                isLeftmost  = false,
+                isRightmost = false
 
-                                relativeTo: this.el,
+            return item.addClass ('dd-item').drag ({
 
-                                start: this.$ (function (where, e) {
+                useOverlayForCapturingEvents: false, // overlay codepath is buggy
 
-                                                    if (!this.canDrag (item[0])) {
-                                                        return false }
+                relativeTo: this.el,
 
-                                                    item.addClass ('drag')
-                                                    this.isDragging = true;
+                start: (where, e) => {
 
-                                                    //log.ii (where, e.offsetX, e.offsetY)
+                    if (this.isDragging) {
+                        console.warn ("something's wrong")
+                        return false
+                    }
 
-                                                    prevHit = this.hitTest (where)
+                    if (!this.canDrag (item[0])) {
+                        return false
+                    }
 
-                                                    isLeftmost  = item.is (':first-child')
-                                                    isRightmost = item.is (':last-child')
+                    item.addClass ('drag')
+                    this.isDragging = true;
 
-                                                    /*  Set transform origin to where we picked it (to scale around cursor)
-                                                     */
-                                                    item.css ('transform-origin',
-                                                        ((e.offsetX / item.width ())  * 100.0) + '% ' +
-                                                        ((e.offsetY / item.height ()) * 100.0) + '%') }),
+                    prevHit = this.hitTest (where)
 
-                                move: this.$ (function (memo, offset, where, e) { var hit = this.hitTest (where)
+                    isLeftmost  = item.is (':first-child')
+                    isRightmost = item.is (':last-child')
 
-                                                    //log.pp (offset, where)
+                    /*  Set transform origin to where we picked it (to scale around cursor)
+                     */
+                    item.css ('transform-origin',
+                        ((e.offsetX / item.width ())  * 100.0) + '% ' +
+                        ((e.offsetY / item.height ()) * 100.0) + '%')
+                },
 
-                                                    if (!hit.equals (prevHit)) {
-                                                        this.dragItemTo (item, hit)
-                                                        prevHit = hit }
+                move: (memo, offset, where, e) => {
 
-                                                    /*  Stick item to cursor
-                                                     */
-                                                    item.css (item.ddData ().pos.add (offset).asLeftTop) }),
+                    var hit = this.hitTest (where)
 
-                                end: this.$ (function () { this.isDragging = false
+                    if (!hit.equals (prevHit)) {
+                        this.dragItemTo (item, hit)
+                        prevHit = hit }
 
-                                                    _.delay (function () { item.removeClass ('drag') });
+                    /*  Stick item to cursor
+                     */
+                    item.css (item.ddData ().pos.add (offset).asLeftTop)
+                },
 
-                                                    if (item.hasClass ('removing')) {
-                                                        item[0].animateWithAttribute ('disappear').timeout (1000).then (function () {
-                                                            item.removeClass ('removing')
-                                                            if (item.parent ().hasClass ('removing')) {
-                                                                item.parent ().removeClass ('removing').detach () }
-                                                            else {
-                                                                item.detach () } }) }
-                                                    else {
-                                                        this.replacePlaceholderWith (item) }
+                end: () => {
 
-                                                    this.rowPlaceholder.ddData ({ originalSize: this.restPlaceholderSize })
+                    this.isDragging = false
 
-                                                    this.layout.postpone ()
-                                                    this.contentChanged.postpone () }) }) } }
+                    _.delay (function () { item.removeClass ('drag') });
+
+                    if (item.hasClass ('removing')) {
+                        item[0].animateWithAttribute ('disappear').timeout (1000).then (function () {
+                            item.removeClass ('removing')
+                            if (item.parent ().hasClass ('removing')) {
+                                item.parent ().removeClass ('removing').detach () }
+                            else {
+                                item.detach () } }) }
+                    else {
+                        this.replacePlaceholderWith (item) }
+
+                    this.rowPlaceholder.ddData ({ originalSize: this.restPlaceholderSize })
+
+                    this.layout.postpone ()
+                    this.contentChanged.postpone ()
+                }
+            })
+        }
+    }
 
 })
 
