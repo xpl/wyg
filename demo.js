@@ -23,7 +23,8 @@ App = $singleton (Component, {
         require ('useless/server/supervisor'),
         require ('useless/server/http'),
         require ('useless/server/uploads'),
-        require ('useless/server/devtools') ],
+        require ('useless/server/source')
+    ],
 
     shouldRestartOnSourceChange: function (action, file, yes, no) {
                                     if (file.contains (__dirname + '/upload')) no () },
