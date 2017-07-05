@@ -23,7 +23,7 @@ Wyg_MediaIO = $trait ({
 
     $parseMedia: {
 
-        images: function (url) {
+        images (url) {
                     return Image.fetch (url)
                                 .then (function (img) {
                                         return { type: 'img',
@@ -31,7 +31,7 @@ Wyg_MediaIO = $trait ({
                                          originalSize: { width: img.width,
                                                         height: img.height } } }) },
 
-        youtube: function (url) {
+        youtube (url) {
                     var match = url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/)
                     var id = match && (match[7].length === 11) && match[7]
                     if (id) {
@@ -40,6 +40,19 @@ Wyg_MediaIO = $trait ({
                              src: '//www.youtube.com/embed/' + id + '?wmode=transparent',
                     originalSize: { width: 16000,
                                    height: 9000 } } } },
+
+        vimeo (url) {
+
+                    const [,,,,id = null] = url.match (/(http|https)?:\/\/(www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|)(\d+)(?:|\/\?)/) || []
+                    
+                    if (id) {
+                        return {
+                            type: 'iframe',
+                             src: '//player.vimeo.com/video/' + id,
+                    originalSize: { width: 16000,
+                                   height: 9000 } }
+                    }
+        },
     },
 
     supportedMedia: $static ($property (function () {
