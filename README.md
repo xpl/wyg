@@ -22,7 +22,7 @@ A new WYSIWYG editing experience for the modern web.
 
 👉 [**Watch demo on YouTube**](https://www.youtube.com/watch?v=u1wNfSHwSQA)
 
-![pic](http://cdn.jpg.wtf/futurico/95/01/1466218207-950125b46071cd2188453264d5d8b231.png)
+![pic](https://user-images.githubusercontent.com/1294454/28927630-be7869bc-7873-11e7-9040-e66847754e30.jpg)
 
 ## Recent news
 
