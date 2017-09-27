@@ -7,7 +7,9 @@
     "url": "git+https://github.com/xpl/wyg.git"
   },
   "scripts": {
-    "start": "node demo"
+    "start": "node demo",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "keywords": [
     "Wyg",
@@ -30,6 +32,8 @@
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-polyfill": "^6.16.0",
     "babel-preset-es2015": "^6.14.0",
-    "babel-register": "^6.24.1"
-  }
+    "babel-register": "^6.24.1",
+    "snyk": "^1.41.1"
+  },
+  "snyk": true
 }
