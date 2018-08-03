@@ -7,7 +7,8 @@
     "url": "git+https://github.com/xpl/wyg.git"
   },
   "scripts": {
-    "start": "node demo"
+    "start": "node demo",
+    "up": "git pull && npm update"
   },
   "keywords": [
     "Wyg",
@@ -31,5 +32,8 @@
     "babel-polyfill": "^6.16.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-register": "^6.24.1"
+  },
+  "devDependencies": {
+    "ajv": "^6.5.2"
   }
 }
