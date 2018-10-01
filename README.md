@@ -22,7 +22,7 @@ A new WYSIWYG editing experience for the modern web.
 
 👉 [**Watch demo on YouTube**](https://www.youtube.com/watch?v=u1wNfSHwSQA)
 
-![pic](http://wtf.jpg.wtf/95/01/1466218207-950125b46071cd2188453264d5d8b231.png)
+![pic](https://user-images.githubusercontent.com/1294454/28927630-be7869bc-7873-11e7-9040-e66847754e30.jpg)
 
 ## Recent news
 
@@ -45,7 +45,7 @@ In it's current state the stuff is quite unusable. Things to be done:
 
 Minor (but important) tasks:
 
-- [ ] Implement ability to insert text paragraphs at arbitrary location around media rows.
+- [x] Implement ability to insert text paragraphs at arbitrary location around media rows (**[see demo video](http://quick.as/z8gdum3wq)**).
 - [ ] Get rid of jQuery (moving to the [`Node+`](https://github.com/xpl/useless/blob/master/client/node%2B.js) library)
 - [ ] Make use of [`$depends`](https://github.com/xpl/useless/wiki/$trait#dependency-resolving-for-component-traits) mechanism for traits.
 
