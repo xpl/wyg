@@ -38,7 +38,7 @@ DOMObserver = $component ({
             var h = []
 
             var div = N.div.insertMeAfter (document.body.lastChild)
-                div.toggleAttribute ('contenteditable', true)
+                div.toggleAttr ('contenteditable', true)
 
             var obs = new DOMObserver ({
                                 target: div,

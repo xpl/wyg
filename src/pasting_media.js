@@ -35,8 +35,8 @@ Wyg_PastingMedia = $trait ({
 
         /*  $parseMedia and $renderMedia for custom media types */
 
-            test: $parseMedia (function (url) {
-                                    if (url === 'http://test/') {
+            foobar: $parseMedia (function (url) {
+                                    if (url === 'http://foobar/') {
                                         return {
                                             type: 'dummy',
                                             dummyData: 'hello',
@@ -46,10 +46,10 @@ Wyg_PastingMedia = $trait ({
                                     return N ('dummy').attr ({ data: data.dummyData }) }),
 
             init: function () {
-                    this.domReady (N.div.toggleAttribute ('contenteditable', true)
+                    this.domReady (N.div.toggleAttr ('contenteditable', true)
                                         .appendTo (document.body)) } })
 
-        $assert (Wyg.supportedMedia.contains ('test'))
+        $assert (Wyg.supportedMedia.contains ('foobar'))
 
     /*  Simulate paste   */
 
@@ -60,7 +60,7 @@ Wyg_PastingMedia = $trait ({
                 clipboardData: {
                     types: ['text/plain'],
                     items: [{
-                        getAsString: _.cps.constant ('http://test/') }] } })
+                        getAsString: _.cps.constant ('http://foobar/') }] } })
 
     /*  Check results   */
 
@@ -72,7 +72,7 @@ Wyg_PastingMedia = $trait ({
                                                         type: 'dummy',
                                                         dummyData: 'hello',
                                                         originalSize: { width: 800, height: 600 },
-                                                        originalUrl: "http://test/",
+                                                        originalUrl: "http://foobar/",
                                                         relativeSize: { width: 1, height: 0.75 } } ] } ])
 
                             $assert (wyg.html,  '<p empty="true"><br></p>' +

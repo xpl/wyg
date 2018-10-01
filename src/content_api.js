@@ -52,7 +52,7 @@ Wyg_ContentAPI = $trait ({
     renderValueBlock: function (block) {
                             switch (block.type) {
                                 case 'p':
-                                    return N.p.toggleAttribute ('align', (block.align !== 'left') && block.align)
+                                    return N.p.toggleAttr ('align', (block.align !== 'left') && block.align)
                                               .html (block.html)
                                 case 'media':
                                     return N.p.cls ('dd-row')

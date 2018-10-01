@@ -103,7 +103,7 @@ ContentEditable_KeyboardInput = $trait ({
                         'br'    : { i: true }, // for marking caret position
                         'em'    : {} } },
 
-                init: function () { this.dom = N.div.toggleAttribute ('contenteditable', true)
+                init: function () { this.dom = N.div.toggleAttr ('contenteditable', true)
                                                     .insertMeAfter (document.body.lastChild)
                                                     .extend ({
                                                         className: 'wyg-keyboard-input-test-instance',

@@ -85,7 +85,7 @@ ContentEditable_UndoRedo = $trait ({
                                     Wyg_ContentAPI],
 
                         init: function () {
-                            this.domReady (N.div.toggleAttribute ('contenteditable', true)
+                            this.domReady (N.div.toggleAttr ('contenteditable', true)
                                                 .insertMeAfter (document.body.lastChild)) },
 
                         undo: $log (function () { if ($platform.Safari) { this.undoHappened () } else { this.execCommand ('undo') } }),

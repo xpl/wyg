@@ -43,7 +43,7 @@ ContentEditable_MarkupNormalization = $trait ({
 
                 init: function () {
                        
-                        this.dom = N.div.toggleAttribute ('contenteditable', true)
+                        this.dom = N.div.toggleAttr ('contenteditable', true)
                                         .insertMeAfter (document.body.lastChild)
                                         .html (this.html)
 

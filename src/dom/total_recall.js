@@ -236,7 +236,7 @@ $mixin (Node, {
      */
     noHistory: $property ({
                     set: function (value) {
-                                this.toggleAttribute ('no-history', value) },
+                                this.toggleAttr ('no-history', value) },
 
                     get: function () {
                          return this.matchUpwards (function (n) { return  n.getAttribute &&

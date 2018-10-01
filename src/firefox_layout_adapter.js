@@ -11,9 +11,9 @@ Wyg_FirefoxLayoutAdapter = !$platform.Firefox ? $trait () : $trait ({
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
     domReady: function (dom) {
-        dom.toggleAttribute ('static-layout', true) },
+        dom.toggleAttr ('static-layout', true) },
 
     isDragging: function (yes) {
         this.domReady (function (dom) {
-            dom.toggleAttribute ('static-layout', !yes) }) }
+            dom.toggleAttr ('static-layout', !yes) }) }
 })

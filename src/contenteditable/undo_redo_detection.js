@@ -37,7 +37,7 @@ ContentEditable_UndoRedoDetection = $trait ({
         'assure that consequent execCommand do not collapse upon undo': function (done) {
 
             var node =  N.div
-                            .toggleAttributes ({ contenteditable: true })
+                            .toggleAttrs ({ contenteditable: true })
                             .append ('---')
                             .appendTo (document.body)
 
@@ -73,7 +73,7 @@ ContentEditable_UndoRedoDetection = $trait ({
 
                 init: function () {
 
-                    this.domReady (N.div.toggleAttribute ('contenteditable', true)
+                    this.domReady (N.div.toggleAttr ('contenteditable', true)
                                         .append (N.p.append ('and motorcycle.'))
                                         .appendTo (document.body)) } })
 

@@ -1,2 +1,4 @@
 node_modules
 upload
+coverage
+.nyc_output
