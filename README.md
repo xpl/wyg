@@ -266,3 +266,5 @@ Expected return value is a DOM node. For example, returning an FontAwesome icon 
 make: function () {
         return N.div.cls ('wyg-icon fa fa-plus-square') },
 ```
+
+
