@@ -8,7 +8,9 @@
   },
   "scripts": {
     "start": "node demo",
-    "up": "git pull origin master && npm update"
+    "up": "git pull origin master && npm update",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "keywords": [
     "Wyg",
@@ -34,6 +36,8 @@
     "babel-register": "^6.24.1"
   },
   "dependencies": {
-    "useless": "^0.1.353"
-  }
+    "useless": "^0.1.353",
+    "snyk": "^1.319.0"
+  },
+  "snyk": true
 }
