@@ -34,6 +34,6 @@
     "babel-register": "^6.24.1"
   },
   "dependencies": {
-    "useless": "^0.1.353"
+    "useless": "^0.1.355"
   }
 }
